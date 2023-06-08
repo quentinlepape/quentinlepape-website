@@ -1,0 +1,118 @@
+.list {
+  --padding-item: 0.625rem; /* 10px */
+  --padding-item-top: 0.625rem; /* 10px */
+}
+
+.list {
+  overflow-x: scroll;
+  position: relative;
+  gap: 1.25rem; /* 20px */
+  left: calc(var(--padding-main) * -1);
+  padding-left: var(--padding-main);
+  padding-right: var(--padding-main);
+  width: calc(100% + var(--padding-main) + var(--padding-main));
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  padding-top: var(--padding-item-top);
+  padding-bottom: var(--padding-item);
+  margin-top: calc(var(--padding-item-top) * -1);
+  margin-bottom: calc(var(--padding-item) * -1);
+}
+.list::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+.li {
+  width: 24rem;
+  padding: var(--padding-item);
+  padding-top: var(--padding-item-top);
+  margin: calc(var(--padding-item) * -1);
+  margin-top: calc(var(--padding-item-top) * -1);
+  background-color: rgba(51, 51, 51, 0);
+  transition: 150ms;
+}
+.li:hover {
+  background-color: rgba(51, 51, 51, 0.15);
+}
+
+.itemWrapper {
+  box-shadow: 0 0px 0.375rem -0.0625rem rgb(0 0 0 / 0),
+    0 0px 0.25rem -0.125rem rgb(0 0 0 / 0);
+  transition: 150ms;
+}
+li:hover .itemWrapper {
+  box-shadow: 0 0px 0.375rem -0.0625rem rgb(0 0 0 / 0.1),
+    0 0px 0.25rem -0.125rem rgb(0 0 0 / 0.1);
+}
+
+.titleWrapper {
+  white-space: nowrap;
+}
+.titleWrapper::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  border-width: 1px;
+  border-top-width: 0;
+  border-color: rgba(119, 119, 119, 0.3);
+  border-radius: 0.375rem; /* 6px */
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.titleWrapper > * {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.videoWrapper::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  border-width: 1px;
+  border-color: rgba(119, 119, 119, 0.3);
+  border-radius: 0.375rem; /* 6px */
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: 100ms;
+}
+.videoWrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  z-index: 2;
+  opacity: 100%;
+  transition: 100ms;
+  background-size: cover;
+}
+.li:hover .videoWrapper::before {
+  opacity: 0%;
+}
+
+.poster {
+  position: absolute;
+  inset: 0px;
+  background-size: cover;
+  opacity: 100%;
+  transition: 150ms;
+}
+.li:hover .poster {
+  opacity: 0%;
+}
+
+/* Below 768px */
+@media (max-width: 767px) {
+  .list {
+    gap: 1rem; /* 16px */
+  }
+  .li {
+    width: 80%;
+  }
+}

@@ -1,0 +1,12 @@
+/* Below 768px */
+@media (max-width: 767px) {
+  .rowHeaderResponsiveContentContainer {
+    display: flex;
+  }
+  .rowMiddleWrapper {
+    display: none;
+  }
+  .rowEndWrapper {
+    display: none;
+  }
+}
