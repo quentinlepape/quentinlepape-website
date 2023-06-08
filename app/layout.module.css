@@ -1,0 +1,16 @@
+.sidebarWrapper {
+  flex-basis: var(--width-sidebar);
+  display: var(--display-sidebar);
+  transition: 150ms;
+}
+.sidebar {
+  width: var(--width-sidebar);
+  transition: 150ms;
+}
+
+.location::before {
+  content: "📍";
+  padding-right: 0.375em;
+}
+/* .globeWrapper {
+} */
