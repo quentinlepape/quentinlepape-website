@@ -255,8 +255,10 @@ export default function Table({
 }): JSX.Element {
   const tableItems: ITableItem[] = toTableItems(data);
   return (
-    <table className="w-full table border-y border-color text-S">
-      <tbody className="divide-y-table divide-color-table">
+    <table
+      className={`${styles.table} w-full table border-y border-color text-S`}
+    >
+      <tbody className="">
         {tableItems.map((el, i) => (
           <tr key={i}>
             {RowHeader(el)}
