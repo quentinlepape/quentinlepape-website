@@ -157,6 +157,8 @@ export default function VideoPreviewList({
             className={styles.poster}
             alt=""
             sizes="364px"
+            quality={100}
+            placeholder="blur"
           ></Image>
         </div>
       </div>
