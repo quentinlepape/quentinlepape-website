@@ -4,7 +4,7 @@ import { CurriculumVitae } from "./data/curriculumVitae";
 import ClientsList from "./components/ClientsList";
 import TitledSection from "./components/TitledSection";
 import Table from "./components/table/Table";
-import SocialLinks from "./components/SocialLinks";
+import SocialLinks from "./components/socialLinks/SocialLinks";
 import Image from "next/image";
 import logo from "./images/logo.svg";
 import VideoPreviewList from "./components/videoPreviewList/VideoPreviewList";
