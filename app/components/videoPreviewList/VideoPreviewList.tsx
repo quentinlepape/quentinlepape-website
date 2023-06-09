@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import Lightbox from "../lightbox/Lightbox";
 import {
   CurriculumVitae,
@@ -146,16 +147,17 @@ export default function VideoPreviewList({
             muted
             loop
             controls={false}
-            poster={el.content.video.poster}
+            poster={el.content.video.poster.src}
           >
             <source src={el.content.video.location} type="video/mp4" />
           </video>
-          <div
+          <Image
+            fill
+            src={el.content.video.poster}
             className={styles.poster}
-            style={{
-              backgroundImage: `url(${el.content.video.poster})`,
-            }}
-          ></div>
+            alt=""
+            sizes="364px"
+          ></Image>
         </div>
       </div>
     );

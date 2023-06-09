@@ -98,9 +98,6 @@ li:hover .itemWrapper {
 }
 
 .poster {
-  position: absolute;
-  inset: 0px;
-  background-size: cover;
   opacity: 100%;
   transition: 150ms;
 }
