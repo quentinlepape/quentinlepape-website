@@ -1,5 +1,12 @@
 import { StaticImageData } from "next/image";
 import palantirLogo from "../images/palantir-logo.png";
+import ontologyPoster from "../../public/videos/previews/ontology/poster.png";
+import aimlPoster from "../../public/videos/previews/aiml/poster.png";
+import wfpPoster from "../../public/videos/previews/wfp/poster.png";
+import healthlifesciencesPoster from "../../public/videos/previews/healthlifesciences/poster.png";
+import usarmyPoster from "../../public/videos/previews/usarmy/poster.png";
+import scuderiaferrariPoster from "../../public/videos/previews/scuderiaferrari/poster.png";
+import cleanenergyPoster from "../../public/videos/previews/cleanenergy/poster.png";
 import { IconName } from "../components/Icon";
 
 const CurriculumVitaeTypes = {
@@ -58,7 +65,7 @@ export interface ICurriculumVitaeSpotlight {
     link: URL;
     video: {
       location: string;
-      poster: string;
+      poster: StaticImageData;
       startTime: number;
     };
     embed?: JSX.Element;
@@ -441,7 +448,7 @@ export const CurriculumVitae: {
         video: {
           location: "/videos/previews/ontology/videopreview.mp4",
           startTime: 0,
-          poster: "/videos/previews/ontology/poster.png",
+          poster: ontologyPoster,
         },
       },
     },
@@ -456,7 +463,7 @@ export const CurriculumVitae: {
         video: {
           location: "/videos/previews/aiml/videopreview.mp4",
           startTime: 0,
-          poster: "/videos/previews/aiml/poster.png",
+          poster: aimlPoster,
         },
       },
     },
@@ -481,7 +488,7 @@ export const CurriculumVitae: {
         video: {
           location: "/videos/previews/wfp/videopreview.mp4",
           startTime: 0,
-          poster: "/videos/previews/wfp/poster.png",
+          poster: wfpPoster,
         },
       },
     },
@@ -502,7 +509,7 @@ export const CurriculumVitae: {
           location:
             "/videos/previews/healthlifesciences/videopreview.mp4#t=1.1",
           startTime: 1.1,
-          poster: "/videos/previews/healthlifesciences/poster.png",
+          poster: healthlifesciencesPoster,
         },
       },
     },
@@ -527,7 +534,7 @@ export const CurriculumVitae: {
         video: {
           location: "/videos/previews/usarmy/videopreview.mp4",
           startTime: 0,
-          poster: "/videos/previews/usarmy/poster.png",
+          poster: usarmyPoster,
         },
       },
     },
@@ -552,7 +559,7 @@ export const CurriculumVitae: {
         video: {
           location: "/videos/previews/scuderiaferrari/videopreview.mp4",
           startTime: 0,
-          poster: "/videos/previews/scuderiaferrari/poster.png",
+          poster: scuderiaferrariPoster,
         },
       },
     },
@@ -577,7 +584,7 @@ export const CurriculumVitae: {
         video: {
           location: "/videos/previews/cleanenergy/videopreview.mp4",
           startTime: 0,
-          poster: "/videos/previews/cleanenergy/poster.png",
+          poster: cleanenergyPoster,
         },
       },
     },

@@ -26,6 +26,7 @@
 
 .li {
   width: 24rem;
+  max-width: 24rem;
   padding: var(--padding-item);
   padding-top: var(--padding-item-top);
   margin: calc(var(--padding-item) * -1);
@@ -97,9 +98,6 @@ li:hover .itemWrapper {
 }
 
 .poster {
-  position: absolute;
-  inset: 0px;
-  background-size: cover;
   opacity: 100%;
   transition: 150ms;
 }

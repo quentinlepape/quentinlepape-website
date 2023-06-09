@@ -1,0 +1,18 @@
+.socialLinksList {
+  margin-left: -0.125rem; /* 2px */
+}
+.socialLinksList a {
+  display: flex;
+  padding-left: 0.125rem; /* 2px */
+  padding-right: 0.125rem; /* 2px */
+}
+@media (pointer: coarse) {
+  .socialLinksList a {
+    padding-left: 0.2rem; /* 4px */
+    padding-right: 0.2rem; /* 4px */
+  }
+  .socialLinksList svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
