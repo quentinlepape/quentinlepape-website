@@ -45,24 +45,18 @@ interface IIcon {
 }
 
 export default function Icon({
-  name,
-  size,
-  flavor,
+  name = "Cube",
+  size = "16",
+  flavor = "default",
   classNames,
 }: IIcon): JSX.Element {
   const IconName: (props: ISVGIcon) => JSX.Element = Icons[name];
   return (
     <IconName
-      width={size ? IconSizes[size] : Icon.defaultProps.size}
-      height={size ? IconSizes[size] : Icon.defaultProps.size}
+      width={IconSizes[size]}
+      height={IconSizes[size]}
       flavor={flavor}
       className={classNames}
     ></IconName>
   );
 }
-
-Icon.defaultProps = {
-  name: "Cube",
-  size: "16",
-  flavor: "default",
-};
