@@ -3,6 +3,9 @@
   .rowHeaderResponsiveContentContainer {
     display: flex;
   }
+  .rowHeaderResponsiveContentContainerInline {
+    display: inline;
+  }
   .rowMiddleWrapper {
     display: none;
   }

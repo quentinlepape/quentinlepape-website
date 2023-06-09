@@ -96,7 +96,9 @@ function RowHeader(item: ITableItem): JSX.Element {
               <span className="ml-1.25 text-faded text-regular">
                 {item.subtitle}
                 {item.date && !item.description && (
-                  <span className="text-ultra-faded">
+                  <span
+                    className={`${styles.rowHeaderResponsiveContentContainerInline} hidden text-ultra-faded`}
+                  >
                     {" "}
                     &#40;{renderRowEnd(item, "text-left text-ultra-faded")}
                     &#41;
