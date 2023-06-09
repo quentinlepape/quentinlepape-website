@@ -135,7 +135,7 @@ export default function VideoPreviewList({
     const videoComponent = (
       <div>
         <div
-          className={`${styles.videoWrapper} bg-backdrop aspect-video rounded-md relative`}
+          className={`${styles.videoWrapper} aspect-video rounded-md relative`}
         >
           <video
             ref={spotlightVideoPreviews[i]}
