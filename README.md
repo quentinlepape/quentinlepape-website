@@ -2,7 +2,7 @@
 
 My personal website. See: [quentinlepape.com](https://www.quentinlepape.com/)
 
-## Built with
+## Stack used
 
 Built with:
 
