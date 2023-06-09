@@ -256,7 +256,7 @@ export default function Table({
   const tableItems: ITableItem[] = toTableItems(data);
   return (
     <table className="w-full table border-y border-color text-S">
-      <tbody className="divide-y divide-color">
+      <tbody className="divide-y-table divide-color-table">
         {tableItems.map((el, i) => (
           <tr key={i}>
             {RowHeader(el)}

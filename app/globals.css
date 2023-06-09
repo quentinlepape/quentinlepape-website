@@ -721,6 +721,10 @@ p {
   border-top-width: 1px;
   border-bottom-width: 0px;
 }
+.divide-y-table > * + * > * {
+  border-top-width: 1px;
+  border-bottom-width: 0px;
+}
 .divide-x > * + * {
   border-left-width: 1px;
   border-right-width: 0px;
@@ -755,7 +759,7 @@ p {
   border-color: rgba(0, 0, 0, 0.2);
   border-radius: 0.25rem;
 }
-.divide-color > * + * {
+.divide-color-table > * + * > * {
   border-color: var(--color-divider);
 }
 .divide-currentColor > * + * {
