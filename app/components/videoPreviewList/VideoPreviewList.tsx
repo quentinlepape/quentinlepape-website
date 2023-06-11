@@ -187,21 +187,21 @@ export default function VideoPreviewList({
       <li
         className={`${styles.li} cursor-pointer shrink-0 rounded-lg relative`}
         key={i}
-        onPointerEnter={(e) => {
+        onMouseEnter={(e) => {
           startVideo(
             e.currentTarget.firstElementChild!.firstElementChild!
               .firstElementChild!.firstElementChild! as HTMLVideoElement
           );
           scrollIntoView(e.currentTarget);
         }}
-        onPointerLeave={(e) => {
+        onMouseLeave={(e) => {
           stopVideo(
             e.currentTarget.firstElementChild!.firstElementChild!
               .firstElementChild!.firstElementChild! as HTMLVideoElement,
             spotlights[i].content.video.startTime
           );
         }}
-        onPointerDown={() => {
+        onPointerUp={() => {
           setlightboxContent(handlePreviewClick(el));
         }}
       >
