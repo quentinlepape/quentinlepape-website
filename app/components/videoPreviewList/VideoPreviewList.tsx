@@ -23,14 +23,61 @@ function renderSubtitle(contentType: spotlightContentType) {
   }
 }
 
-function scrollIntoView(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
-  const scrollAgent = e.currentTarget;
+function RenderItemWrapper({
+  el,
+  children,
+}: {
+  el: ICurriculumVitaeSpotlight;
+  children: JSX.Element[];
+}) {
+  if (el.content.embed) {
+    return (
+      <div
+        className={`${styles.itemWrapper} flex flex-col rounded-md bg-white overflow-hidden`}
+      >
+        {children}
+      </div>
+    );
+  } else {
+    return (
+      <Link
+        href={el.content.link}
+        target="_blank"
+        className={`${styles.itemWrapper} flex flex-col rounded-md bg-white overflow-hidden`}
+      >
+        {children}
+      </Link>
+    );
+  }
+}
+
+function startVideo(video: HTMLVideoElement) {
+  video.play();
+}
+function stopVideo(video: HTMLVideoElement, startTime: number) {
+  video.pause();
+  const timeout = setTimeout(() => {
+    video.currentTime = startTime;
+  }, 150);
+  return () => clearTimeout(timeout);
+}
+
+function handlePreviewClick(clickedSpotlight: ICurriculumVitaeSpotlight) {
+  if (clickedSpotlight.content.embed) {
+    return {
+      embed: clickedSpotlight.content.embed!,
+      title: clickedSpotlight.title + " | " + clickedSpotlight.subtitle,
+      link: clickedSpotlight.content.link,
+    };
+  }
+}
+
+function scrollIntoView(scrollAgent: HTMLElement) {
+  // const scrollAgent = e.currentTarget;
   const scrollContainer = scrollAgent.parentElement!;
 
   const agentStyle = window.getComputedStyle(scrollAgent);
-  const containerStyle = window.getComputedStyle(
-    e.currentTarget.parentElement!
-  );
+  const containerStyle = window.getComputedStyle(scrollAgent.parentElement!);
 
   // Target distance from the edge of the container
   const targetDistFromEdge =
@@ -94,34 +141,6 @@ export default function VideoPreviewList({
     return refs;
   }, [spotlights]);
 
-  function startVideo(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
-    const video = e.currentTarget.firstElementChild!.firstElementChild!
-      .firstElementChild!.firstElementChild! as HTMLVideoElement;
-    video.play();
-  }
-  function stopVideo(
-    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    videoID: number
-  ) {
-    const video = e.currentTarget.firstElementChild!.firstElementChild!
-      .firstElementChild!.firstElementChild! as HTMLVideoElement;
-    video.pause();
-    const timeout = setTimeout(() => {
-      video.currentTime = spotlights[videoID].content.video.startTime;
-    }, 150);
-    return () => clearTimeout(timeout);
-  }
-
-  function handlePreviewClick(clickedSpotlight: ICurriculumVitaeSpotlight) {
-    if (clickedSpotlight.content.embed) {
-      setlightboxContent({
-        embed: clickedSpotlight.content.embed!,
-        title: clickedSpotlight.title + " | " + clickedSpotlight.subtitle,
-        link: clickedSpotlight.content.link,
-      });
-    }
-  }
-
   function renderPreviewItem(el: ICurriculumVitaeSpotlight, i: number) {
     const titleComponent = (
       <div
@@ -164,54 +183,41 @@ export default function VideoPreviewList({
       </div>
     );
 
-    if (el.content.embed) {
-      return (
-        <li
-          className={`${styles.li} cursor-pointer shrink-0 rounded-lg relative`}
-          key={i}
-          onMouseEnter={(e) => {
-            startVideo(e);
-            scrollIntoView(e);
-          }}
-          onMouseLeave={(e) => {
-            stopVideo(e, i);
-          }}
-          onClick={() => {
-            handlePreviewClick(el);
-          }}
-        >
-          <div
-            className={`${styles.itemWrapper} flex flex-col rounded-md bg-white overflow-hidden`}
-          >
-            {videoComponent}
-            {titleComponent}
-          </div>
-        </li>
-      );
-    } else {
-      return (
-        <li
-          className={`${styles.li} cursor-pointer shrink-0 rounded-lg relative`}
-          key={i}
-          onMouseEnter={(e) => {
-            startVideo(e);
-            scrollIntoView(e);
-          }}
-          onMouseLeave={(e) => {
-            stopVideo(e, i);
-          }}
-        >
-          <Link
-            href={el.content.link}
-            target="_blank"
-            className={`${styles.itemWrapper} flex flex-col rounded-md bg-white overflow-hidden`}
-          >
-            {videoComponent}
-            {titleComponent}
-          </Link>
-        </li>
-      );
-    }
+    return (
+      <li
+        className={`${styles.li} cursor-pointer shrink-0 rounded-lg relative`}
+        key={i}
+        onMouseEnter={(e) => {
+          startVideo(
+            e.currentTarget.firstElementChild!.firstElementChild!
+              .firstElementChild!.firstElementChild! as HTMLVideoElement
+          );
+          scrollIntoView(e.currentTarget);
+        }}
+        onFocus={(e) => {
+          startVideo(
+            e.currentTarget.firstElementChild!.firstElementChild!
+              .firstElementChild!.firstElementChild! as HTMLVideoElement
+          );
+          scrollIntoView(e.currentTarget);
+        }}
+        onMouseLeave={(e) => {
+          stopVideo(
+            e.currentTarget.firstElementChild!.firstElementChild!
+              .firstElementChild!.firstElementChild! as HTMLVideoElement,
+            spotlights[i].content.video.startTime
+          );
+        }}
+        onClick={() => {
+          setlightboxContent(handlePreviewClick(el));
+        }}
+      >
+        <RenderItemWrapper el={el}>
+          {videoComponent}
+          {titleComponent}
+        </RenderItemWrapper>
+      </li>
+    );
   }
 
   return (
