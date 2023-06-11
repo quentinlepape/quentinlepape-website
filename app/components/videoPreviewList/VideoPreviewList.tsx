@@ -142,15 +142,6 @@ export default function VideoPreviewList({
   }, [spotlights]);
 
   function renderPreviewItem(el: ICurriculumVitaeSpotlight, i: number) {
-    const titleComponent = (
-      <div
-        className={`${styles.titleWrapper} relative flex flex-col px-5 pt-3 pb-3.5`}
-      >
-        <h3 className="text-medium text-M">{el.title}</h3>
-        <h4 className="text-regular text-S text-faded">{el.subtitle}</h4>
-      </div>
-    );
-
     const videoComponent = (
       <div>
         <div
@@ -180,6 +171,15 @@ export default function VideoPreviewList({
             placeholder="blur"
           ></Image>
         </div>
+      </div>
+    );
+
+    const titleComponent = (
+      <div
+        className={`${styles.titleWrapper} relative flex flex-col px-5 pt-3 pb-3.5`}
+      >
+        <h3 className="text-medium text-M">{el.title}</h3>
+        <h4 className="text-regular text-S text-faded">{el.subtitle}</h4>
       </div>
     );
 
