@@ -1,5 +1,6 @@
 import { StaticImageData } from "next/image";
 import palantirLogo from "../images/palantir-logo.png";
+import palantirLogoSvg from "../images/palantir-logo.svg";
 import ontologyPoster from "../../public/videos/previews/ontology/poster.png";
 import aimlPoster from "../../public/videos/previews/aiml/poster.png";
 import wfpPoster from "../../public/videos/previews/wfp/poster.png";
@@ -108,7 +109,7 @@ export const CurriculumVitae: {
       type: "experience",
       companyName: "Palantir Technologies",
       image: {
-        imageSource: palantirLogo,
+        imageSource: palantirLogoSvg,
         imageAlt: "Palantir Technologies logo",
       },
       detail: "",
