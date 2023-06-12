@@ -201,7 +201,7 @@ export default function VideoPreviewList({
             spotlights[i].content.video.startTime
           );
         }}
-        onPointerUp={() => {
+        onClick={() => {
           setlightboxContent(handlePreviewClick(el));
         }}
       >
