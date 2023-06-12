@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ICurriculumVitaeSpotlight } from "../../data/curriculumVitae";
 import styles from "./videoPreviewList.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useIntersection } from "@/app/utils/useIntersection";
 
 function RenderItemWrapper({
   spotlight,
@@ -52,13 +53,12 @@ function handlePreviewClick(clickedSpotlight: ICurriculumVitaeSpotlight) {
 }
 
 function scrollIntoView(scrollAgent: HTMLElement) {
-  // const scrollAgent = e.currentTarget;
   const scrollContainer = scrollAgent.parentElement!;
 
   const agentStyle = window.getComputedStyle(scrollAgent);
   const containerStyle = window.getComputedStyle(scrollAgent.parentElement!);
 
-  // Target distance from the edge of the container
+  //* Target distance from the edge of the container
   const targetDistFromEdge =
     parseFloat(containerStyle.paddingLeft) + parseFloat(agentStyle.marginLeft);
 
@@ -114,15 +114,32 @@ export default function VideoPreview({
     link: URL;
   }) => void;
 }) {
-  const ref = useRef();
+  const isCenteredInViewport = useRef(false);
+  const liRef = useRef(null);
+  const hasPlayed = useRef(false);
+  const videoRef = useRef(null);
+
+  const inTriggerZone = useIntersection(liRef, "-40% -50% -50% -50%", 0);
+
+  if (inTriggerZone) {
+    isCenteredInViewport.current = true;
+    startVideo(videoRef.current!);
+  }
+  if (hasPlayed.current && !inTriggerZone) {
+    isCenteredInViewport.current = false;
+    stopVideo(videoRef.current!, spotlight.content.video.startTime);
+  }
+
   const videoComponent = (
     <div>
       <div
         className={`${styles.videoWrapper} aspect-video rounded-md relative`}
       >
         <video
-          //   ref={spotlightVideoPreviews[i]}
-          ref={ref.current}
+          ref={videoRef}
+          onPlay={() => {
+            hasPlayed.current = true;
+          }}
           className="w-full absolute"
           playsInline
           disablePictureInPicture
@@ -159,21 +176,17 @@ export default function VideoPreview({
 
   return (
     <li
-      className={`${styles.li} cursor-pointer shrink-0 rounded-lg relative`}
+      ref={liRef}
+      className={`${styles.li} ${
+        isCenteredInViewport.current && styles.centeredInViewport
+      } cursor-pointer shrink-0 rounded-lg relative`}
       key={i}
       onMouseEnter={(e) => {
-        startVideo(
-          e.currentTarget.firstElementChild!.firstElementChild!
-            .firstElementChild!.firstElementChild! as HTMLVideoElement
-        );
+        startVideo(videoRef.current!);
         scrollIntoView(e.currentTarget);
       }}
       onMouseLeave={(e) => {
-        stopVideo(
-          e.currentTarget.firstElementChild!.firstElementChild!
-            .firstElementChild!.firstElementChild! as HTMLVideoElement,
-          spotlight.content.video.startTime
-        );
+        stopVideo(videoRef.current!, spotlight.content.video.startTime);
       }}
       onClick={() => {
         spotlight.content.embed && onClick(handlePreviewClick(spotlight));
