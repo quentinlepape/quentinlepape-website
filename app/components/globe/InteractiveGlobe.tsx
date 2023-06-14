@@ -1,44 +1,62 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
+import { GlobeMethods } from "react-globe.gl";
 import * as THREE from "three";
-const Globe = dynamic(() => import("react-globe.gl"), { ssr: false });
+
+const GlobeTmpl = dynamic(() => import("./globeWrapper"), {
+  ssr: false,
+});
+const Globe = forwardRef((props: any, ref) => (
+  <GlobeTmpl {...props} forwardRef={ref} />
+));
+Globe.displayName = "Globe";
 
 const globeMaterial = new THREE.MeshPhongMaterial();
 globeMaterial.bumpScale = 10;
 new THREE.TextureLoader().load(
   "//unpkg.com/three-globe/example/img/earth-water.png",
   (texture: any) => {
-    globeMaterial.specularMap = texture;
+    // globeMaterial.specularMap = texture;
     globeMaterial.specular = new THREE.Color("grey");
     globeMaterial.shininess = 15;
   }
 );
 
 export default function InteractiveGlobe() {
-  const globeRef = useRef(null);
+  const globeRef = useRef<GlobeMethods>();
+  const [isGlobeReady, setGlobeReady] = useState<boolean>();
 
   useEffect(() => {
-    console.log(globeRef.current);
-    // setTimeout(() => {
-    //   // wait for scene to be populated (asynchronously)
-    //   const directionalLight = globeRef.current
-    //     .scene()
-    //     .children.find((obj3d) => obj3d.type === "DirectionalLight");
-    //   directionalLight && directionalLight.position.set(1, 1, 1); // change light position to see the specularMap's effect
-    // });
-  }, [globeRef.current]);
+    console.log(isGlobeReady);
+    if (isGlobeReady) {
+      // wait for scene to be populated (asynchronously)
+      const directionalLight = globeRef
+        .current!.scene()
+        .children.find((obj3d) => obj3d.type === "DirectionalLight");
+      directionalLight && directionalLight.position.set(1, 1, 1); // change light position to see the specularMap's effect
+    }
+  }, [isGlobeReady]);
 
   return (
     <Globe
       ref={globeRef}
       width={260}
       height={260}
+      // width={
+      //   typeof window !== "undefined" && window.innerWidth > 575 ? 460 : 288
+      // }
+      // height={
+      //   typeof window !== "undefined" && window.innerWidth > 575 ? 700 : 440
+      // }
       backgroundColor="rgba(0,0,0,0)"
       globeMaterial={globeMaterial}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
       bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+      onGlobeReady={() => {
+        setGlobeReady(true);
+      }}
       // atmosphereAltitude={0.15}
     />
   );
