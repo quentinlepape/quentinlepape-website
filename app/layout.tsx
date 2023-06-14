@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import Image from "next/image";
 import logo from "./images/logo.svg";
 import LocationsList from "./components/LocationsList";
+import InteractiveGlobe from "./components/globe/InteractiveGlobe";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Variable.woff2",
@@ -46,7 +47,9 @@ export default function RootLayout({
                 <h2 className="mb-2">Work locations</h2>
                 <LocationsList></LocationsList>
               </div>
-              <div className={styles.globeWrapper}></div>
+              <div className={styles.globeWrapper}>
+                <InteractiveGlobe />
+              </div>
             </section>
           </div>
         </div>
