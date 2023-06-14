@@ -1,9 +1,18 @@
 "use client";
 
-import GlobeTmpl from "react-globe.gl";
+import { MutableRefObject } from "react";
+import GlobeTmpl, { GlobeMethods, GlobeProps } from "react-globe.gl";
 
-const Globe = ({ forwardRef, ...otherProps }: any) => (
-  <GlobeTmpl {...otherProps} ref={forwardRef} />
-);
+export type FCwithRef<P = {}, R = {}> = React.FunctionComponent<
+  P & { ref?: React.MutableRefObject<R | undefined> }
+>;
+
+const Globe = ({
+  forwardRef,
+  ...otherProps
+}: {
+  forwardRef: MutableRefObject<GlobeMethods | undefined> | undefined;
+  otherProps: FCwithRef<GlobeProps, GlobeMethods>;
+}) => <GlobeTmpl {...otherProps} ref={forwardRef} />;
 
 export default Globe;
