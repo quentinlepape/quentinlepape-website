@@ -12,7 +12,7 @@ function Locations(locations: ICurriculumVitaeLocationsWorked[]) {
     ) : null;
     locationsList.push(
       <li className={styles.location}>
-        {location.location}
+        {location.locationName}
         {secondaryLabel}
       </li>
     );

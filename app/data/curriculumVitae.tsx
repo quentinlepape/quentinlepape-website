@@ -81,7 +81,11 @@ export interface ICurriculumVitaePatents {
 }
 export interface ICurriculumVitaeLocationsWorked {
   type: typeof CurriculumVitaeTypes.locationWorked;
-  location: string;
+  locationName: string;
+  geo: {
+    lat: number;
+    lon: number;
+  };
   detail?: string;
 }
 
@@ -618,30 +622,54 @@ export const CurriculumVitae: {
   locationsWorked: [
     {
       type: "locationWorked",
-      location: "San Francisco",
+      locationName: "San Francisco",
+      geo: {
+        lat: 34.5,
+        lon: 131.6,
+      },
     },
     {
       type: "locationWorked",
-      location: "New York",
+      locationName: "New York",
+      geo: {
+        lat: 34.5,
+        lon: 131.6,
+      },
     },
     {
       type: "locationWorked",
-      location: "Los Angeles",
+      locationName: "Los Angeles",
+      geo: {
+        lat: 34.5,
+        lon: 131.6,
+      },
     },
     {
       type: "locationWorked",
-      location: "London",
+      locationName: "London",
       detail: "UK",
+      geo: {
+        lat: 34.5,
+        lon: 131.6,
+      },
     },
     {
       type: "locationWorked",
-      location: "Paris",
+      locationName: "Paris",
       detail: "France",
+      geo: {
+        lat: 45.78,
+        lon: 2.97,
+      },
     },
     {
       type: "locationWorked",
-      location: "Munich",
+      locationName: "Munich",
       detail: "Germany",
+      geo: {
+        lat: 34.5,
+        lon: 131.6,
+      },
     },
   ],
 };
