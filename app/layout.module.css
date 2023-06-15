@@ -6,6 +6,7 @@
 .sidebar {
   width: var(--width-sidebar);
   transition: 150ms;
+  overflow: hidden;
 }
 
 .location::before {
@@ -15,5 +16,6 @@
 .globeWrapper {
   margin-left: -40px;
   margin-right: -40px;
-  margin-bottom: -40px;
+  /* margin-bottom: calc((40 - 260) * -1px); */
+  margin-bottom: -300px;
 }
