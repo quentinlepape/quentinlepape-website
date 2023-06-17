@@ -624,24 +624,24 @@ export const CurriculumVitae: {
       type: "locationWorked",
       locationName: "San Francisco",
       geo: {
-        lat: 34.5,
-        lon: 131.6,
+        lat: 37.77,
+        lon: -122.43,
       },
     },
     {
       type: "locationWorked",
       locationName: "New York",
       geo: {
-        lat: 34.5,
-        lon: 131.6,
+        lat: 40.73,
+        lon: -73.93,
       },
     },
     {
       type: "locationWorked",
       locationName: "Los Angeles",
       geo: {
-        lat: 34.5,
-        lon: 131.6,
+        lat: 34.05,
+        lon: -118.24,
       },
     },
     {
@@ -649,8 +649,8 @@ export const CurriculumVitae: {
       locationName: "London",
       detail: "UK",
       geo: {
-        lat: 34.5,
-        lon: 131.6,
+        lat: 51.51,
+        lon: -0.12,
       },
     },
     {
@@ -658,8 +658,8 @@ export const CurriculumVitae: {
       locationName: "Paris",
       detail: "France",
       geo: {
-        lat: 45.78,
-        lon: 2.97,
+        lat: 48.86,
+        lon: 2.35,
       },
     },
     {
@@ -667,8 +667,8 @@ export const CurriculumVitae: {
       locationName: "Munich",
       detail: "Germany",
       geo: {
-        lat: 34.5,
-        lon: 131.6,
+        lat: 48.14,
+        lon: 11.58,
       },
     },
   ],
