@@ -3,7 +3,8 @@
 import dynamic from "next/dynamic";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { GlobeMethods } from "react-globe.gl";
-import * as THREE from "three";
+// import * as THREE from "../../../node_modules/three/src/Three";
+const THREE = require("three");
 import {
   CurriculumVitae,
   ICurriculumVitaeLocationsWorked,
@@ -18,23 +19,27 @@ const Globe = forwardRef((props: any, ref) => (
 Globe.displayName = "Globe";
 
 const globeMaterial = new THREE.MeshPhongMaterial();
-globeMaterial.bumpScale = 10;
-new THREE.TextureLoader().load(
-  "//unpkg.com/three-globe/example/img/earth-water.png",
-  (texture: any) => {
-    // ! globeMaterial.specularMap = texture;
-    globeMaterial.specular = new THREE.Color("grey");
-    globeMaterial.shininess = 5;
-  }
-);
+if (typeof document !== "undefined") {
+  let element = document.querySelector(".class-name");
+
+  globeMaterial.bumpScale = 10;
+  new THREE.TextureLoader().load(
+    "//unpkg.com/three-globe/example/img/earth-water.png",
+    (texture: any) => {
+      // ! globeMaterial.specularMap = texture;
+      globeMaterial.specular = new THREE.Color("grey");
+      globeMaterial.shininess = 5;
+    }
+  );
+}
 
 export default function InteractiveGlobe() {
   const locations = CurriculumVitae.locationsWorked;
   const globeRef = useRef<GlobeMethods>();
   const [isGlobeReady, setGlobeReady] = useState<boolean>();
   const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 1365,
+    height: 0,
   });
 
   const getLat = (location: ICurriculumVitaeLocationsWorked) =>
@@ -58,7 +63,6 @@ export default function InteractiveGlobe() {
 
   useEffect(() => {
     function handleResize() {
-      console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     }
     window.addEventListener("resize", handleResize);
@@ -73,7 +77,7 @@ export default function InteractiveGlobe() {
       }
       height={600}
       backgroundColor="rgba(0,0,0,0)"
-      globeMaterial={globeMaterial}
+      globeMaterial={globeMaterial && globeMaterial}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
       bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
       onGlobeReady={() => {
