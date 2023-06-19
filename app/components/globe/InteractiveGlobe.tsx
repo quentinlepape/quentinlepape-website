@@ -56,7 +56,7 @@ export default function InteractiveGlobe() {
   useEffect(() => {
     handleResize();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [window]);
+  }, []);
 
   useEffect(() => {
     const newGlobeMaterial = new THREE.MeshPhongMaterial();
