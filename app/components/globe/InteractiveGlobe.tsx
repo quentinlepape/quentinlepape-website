@@ -18,21 +18,6 @@ const Globe = forwardRef((props: any, ref) => (
 ));
 Globe.displayName = "Globe";
 
-const globeMaterial = new THREE.MeshPhongMaterial();
-if (typeof document !== "undefined") {
-  let element = document.querySelector(".class-name");
-
-  globeMaterial.bumpScale = 10;
-  new THREE.TextureLoader().load(
-    "//unpkg.com/three-globe/example/img/earth-water.png",
-    (texture: any) => {
-      // ! globeMaterial.specularMap = texture;
-      globeMaterial.specular = new THREE.Color("grey");
-      globeMaterial.shininess = 5;
-    }
-  );
-}
-
 export default function InteractiveGlobe() {
   const locations = CurriculumVitae.locationsWorked;
   const globeRef = useRef<GlobeMethods>();
@@ -41,6 +26,9 @@ export default function InteractiveGlobe() {
     width: 1365,
     height: 0,
   });
+  const [globeMaterial, setGlobeMaterial] = useState(
+    new THREE.MeshPhongMaterial()
+  );
 
   const getLat = (location: ICurriculumVitaeLocationsWorked) =>
     location.geo.lat;
@@ -66,6 +54,24 @@ export default function InteractiveGlobe() {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     }
     window.addEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const newGlobeMaterial = new THREE.MeshPhongMaterial();
+    if (typeof document !== "undefined") {
+      let element = document.querySelector(".class-name");
+
+      newGlobeMaterial.bumpScale = 10;
+      new THREE.TextureLoader().load(
+        "//unpkg.com/three-globe/example/img/earth-water.png",
+        (texture: any) => {
+          // ! newGlobeMaterial.specularMap = texture;
+          newGlobeMaterial.specular = new THREE.Color("grey");
+          newGlobeMaterial.shininess = 5;
+        }
+      );
+    }
+    setGlobeMaterial(newGlobeMaterial);
   }, []);
 
   return (
