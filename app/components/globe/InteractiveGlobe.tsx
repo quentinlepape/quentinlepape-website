@@ -29,39 +29,49 @@ new THREE.TextureLoader().load(
 );
 
 export default function InteractiveGlobe() {
+  const locations = CurriculumVitae.locationsWorked;
   const globeRef = useRef<GlobeMethods>();
   const [isGlobeReady, setGlobeReady] = useState<boolean>();
-  const locations = CurriculumVitae.locationsWorked;
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   const getLat = (location: ICurriculumVitaeLocationsWorked) =>
     location.geo.lat;
   const getLon = (location: ICurriculumVitaeLocationsWorked) =>
     location.geo.lon;
-  // ! const getAlt = (data: any) => data.elevation * 5e-5;
 
   useEffect(() => {
-    if (isGlobeReady) {
+    if (isGlobeReady && globeRef.current) {
       // wait for scene to be populated (asynchronously)
-      const directionalLight = globeRef
-        .current!.scene()
+      const directionalLight = globeRef.current
+        .scene()
         .children.find((obj3d) => obj3d.type === "DirectionalLight");
       directionalLight && directionalLight.position.set(1, 1, 1); // change light position to see the specularMap's effect
-      // ! globeRef.current!.scene().position.y = -100;
+      // globeRef.current!.scene().position.y = -1;
+
+      globeRef.current.pointOfView({ lat: 17, lng: 9, altitude: 2 });
+      globeRef.current.controls().enableZoom = false;
     }
   }, [isGlobeReady]);
+
+  useEffect(() => {
+    function handleResize() {
+      console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    }
+    window.addEventListener("resize", handleResize);
+  }, []);
 
   return (
     <Globe
       ref={globeRef}
-      width={260}
-      height={260 * 2}
       showGraticules
-      // width={
-      //   typeof window !== "undefined" && window.innerWidth > 575 ? 460 : 288
-      // }
-      // height={
-      //   typeof window !== "undefined" && window.innerWidth > 575 ? 700 : 440
-      // }
+      width={
+        typeof window !== "undefined" && windowSize.width > 1365 ? 320 : 260
+      }
+      height={600}
       backgroundColor="rgba(0,0,0,0)"
       globeMaterial={globeMaterial}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
@@ -72,6 +82,9 @@ export default function InteractiveGlobe() {
       pointsData={locations}
       pointLat={getLat}
       pointLng={getLon}
+      onGlobeClick={() => {
+        console.log("click");
+      }}
 
       // ! atmosphereAltitude={0.15}
     />

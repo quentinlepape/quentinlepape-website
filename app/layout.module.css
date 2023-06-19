@@ -9,13 +9,22 @@
   overflow: hidden;
 }
 
+.locationsListSection {
+  margin-bottom: 200px;
+}
+
 .location::before {
   content: "📍";
   padding-right: 0.375em;
 }
 .globeWrapper {
-  margin-left: -40px;
-  margin-right: -40px;
+  /* margin-left: -40px; */
+  /* margin-right: -40px; */
   /* margin-bottom: calc((40 - 260) * -1px); */
-  margin-bottom: -300px;
+  /* margin-bottom: -300px; */
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -320px;
 }

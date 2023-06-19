@@ -43,7 +43,7 @@ export default function RootLayout({
               </Link>
             </nav>
             <section>
-              <div>
+              <div className={styles.locationsListSection}>
                 <h2 className="mb-2">Work locations</h2>
                 <LocationsList></LocationsList>
               </div>
