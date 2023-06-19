@@ -28,3 +28,15 @@
   right: 0;
   bottom: -320px;
 }
+.globeWrapper::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 410px / 2);
+  bottom: 110px;
+  width: 410px;
+  height: 410px;
+  border-radius: 1000px;
+  background: var(--color-background-light);
+  box-shadow: inset 0px 4px 104px rgba(0, 0, 0, 0.25),
+    inset 0px 4px 64px rgba(0, 0, 0, 0.25);
+}
