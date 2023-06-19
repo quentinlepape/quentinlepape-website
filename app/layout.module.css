@@ -12,11 +12,52 @@
 .locationsListSection {
   margin-bottom: 200px;
 }
-
+.location {
+  white-space: pre-wrap;
+}
 .location::before {
   content: "📍";
   padding-right: 0.375em;
 }
+.liveIndicator {
+  display: inline-block;
+  /* position: absolute; */
+  background: rgb(114, 211, 104);
+  margin-left: 0.6rem;
+  margin-top: 0.125rem;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(114, 211, 104, 0.2),
+    0 0 0 0px rgba(114, 211, 104, 0);
+  transform: scale(1);
+  animation: pulse-green 3s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    /* transform: scale(0.95); */
+    /* box-shadow: 0 0 0 4px rgba(114, 211, 104, 0.3); */
+    box-shadow: 0 0 0 4px rgba(114, 211, 104, 0.2),
+      0 0 0 0 rgba(114, 211, 104, 0.7);
+  }
+
+  30% {
+    /* transform: scale(1); */
+    /* box-shadow: 0 0 0 5px rgba(114, 211, 104, 0); */
+    /* box-shadow: 0 0 0 5px rgba(114, 211, 104, 0.4); */
+    box-shadow: 0 0 0 4px rgba(114, 211, 104, 0.2),
+      0 0 0 5px rgba(114, 211, 104, 0);
+  }
+
+  100% {
+    /* transform: scale(0.95); */
+    /* box-shadow: 0 0 0 4px rgba(114, 211, 104, 0.3); */
+    box-shadow: 0 0 0 4px rgba(114, 211, 104, 0.2),
+      0 0 0 0 rgba(114, 211, 104, 0);
+  }
+}
+
 .globeWrapper {
   /* margin-left: -40px; */
   /* margin-right: -40px; */
