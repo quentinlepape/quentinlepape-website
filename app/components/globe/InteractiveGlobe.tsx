@@ -50,11 +50,13 @@ export default function InteractiveGlobe() {
   }, [isGlobeReady]);
 
   useEffect(() => {
-    function handleResize() {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-    }
     window.addEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    handleResize();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window]);
 
   useEffect(() => {
     const newGlobeMaterial = new THREE.MeshPhongMaterial();
@@ -73,6 +75,10 @@ export default function InteractiveGlobe() {
     }
     setGlobeMaterial(newGlobeMaterial);
   }, []);
+
+  function handleResize() {
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+  }
 
   return (
     <Globe
