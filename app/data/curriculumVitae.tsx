@@ -87,6 +87,7 @@ export interface ICurriculumVitaeLocationsWorked {
     lon: number;
   };
   detail?: string;
+  current: boolean;
 }
 
 export const CurriculumVitae: {
@@ -627,6 +628,7 @@ export const CurriculumVitae: {
         lat: 37.77,
         lon: -122.43,
       },
+      current: false,
     },
     {
       type: "locationWorked",
@@ -635,6 +637,7 @@ export const CurriculumVitae: {
         lat: 40.73,
         lon: -73.93,
       },
+      current: false,
     },
     {
       type: "locationWorked",
@@ -643,6 +646,7 @@ export const CurriculumVitae: {
         lat: 34.05,
         lon: -118.24,
       },
+      current: false,
     },
     {
       type: "locationWorked",
@@ -652,6 +656,7 @@ export const CurriculumVitae: {
         lat: 51.51,
         lon: -0.12,
       },
+      current: false,
     },
     {
       type: "locationWorked",
@@ -661,6 +666,7 @@ export const CurriculumVitae: {
         lat: 48.86,
         lon: 2.35,
       },
+      current: true,
     },
     {
       type: "locationWorked",
@@ -670,6 +676,7 @@ export const CurriculumVitae: {
         lat: 48.14,
         lon: 11.58,
       },
+      current: false,
     },
   ],
 };
