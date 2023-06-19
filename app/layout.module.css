@@ -65,11 +65,14 @@
   /* margin-bottom: -300px; */
 
   position: absolute;
-  left: 0;
-  right: 0;
+  /* left: 0; */
+  /* right: 0; */
+  left: calc(50% - 600px / 2);
+  width: 600px;
   bottom: -320px;
-  transition: 250ms;
   cursor: pointer;
+  transition: 1500ms;
+  transition-delay: 2s;
 }
 .globeWrapper::before {
   content: "";
@@ -99,6 +102,8 @@
   z-index: -1;
 } */
 .globeWrapper:hover {
+  transition: 250ms;
+  transition-delay: 0s;
   bottom: -314px;
 }
 /* .globeWrapper:hover:after {
