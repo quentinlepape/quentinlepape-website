@@ -16,14 +16,12 @@ function size(name: IconName): IconSize {
   return isSpecialSize ? SpecialSizes[name as SpecialSizes] : defaultSize;
 }
 
-export default function IconSquare({ name }: IIconSquare): JSX.Element {
+export default function IconSquare({
+  name = "Cube",
+}: IIconSquare): JSX.Element {
   return (
     <div className="border-inset rounded mr-3.5 w-7.5 h-7.5 flex justify-center items-center text-dark">
       <Icon size={size(name)} name={name}></Icon>
     </div>
   );
 }
-
-IconSquare.defaultProps = {
-  name: "Cube",
-};
