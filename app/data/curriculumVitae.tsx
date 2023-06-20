@@ -82,11 +82,15 @@ export interface ICurriculumVitaePatents {
 export interface ICurriculumVitaeLocationsWorked {
   type: typeof CurriculumVitaeTypes.locationWorked;
   locationName: string;
+  detail?: string;
   geo: {
     lat: number;
     lon: number;
   };
-  detail?: string;
+  preferredPointOfView: {
+    lat: number;
+    lon: number;
+  };
   current: boolean;
 }
 
@@ -141,7 +145,7 @@ export const CurriculumVitae: {
     {
       type: "experience",
       companyName: "Contracting",
-      image: { icon: "Globe" },
+      image: { icon: "GlobeNetwork" },
       jobTitles: ["Product Designer", "Developer"],
       date: "Since 2014",
     },
@@ -628,6 +632,10 @@ export const CurriculumVitae: {
         lat: 37.77,
         lon: -122.43,
       },
+      preferredPointOfView: {
+        lat: 15.03,
+        lon: -110.98,
+      },
       current: false,
     },
     {
@@ -637,6 +645,10 @@ export const CurriculumVitae: {
         lat: 40.73,
         lon: -73.93,
       },
+      preferredPointOfView: {
+        lat: 14.45,
+        lon: -87.48,
+      },
       current: false,
     },
     {
@@ -645,6 +657,10 @@ export const CurriculumVitae: {
       geo: {
         lat: 34.05,
         lon: -118.24,
+      },
+      preferredPointOfView: {
+        lat: 10.87,
+        lon: -104.93,
       },
       current: false,
     },
@@ -656,6 +672,10 @@ export const CurriculumVitae: {
         lat: 51.51,
         lon: -0.12,
       },
+      preferredPointOfView: {
+        lat: 22,
+        lon: 2.48,
+      },
       current: false,
     },
     {
@@ -666,6 +686,10 @@ export const CurriculumVitae: {
         lat: 48.86,
         lon: 2.35,
       },
+      preferredPointOfView: {
+        lat: 17,
+        lon: 9,
+      },
       current: true,
     },
     {
@@ -675,6 +699,10 @@ export const CurriculumVitae: {
       geo: {
         lat: 48.14,
         lon: 11.58,
+      },
+      preferredPointOfView: {
+        lat: 19.15,
+        lon: 13,
       },
       current: false,
     },

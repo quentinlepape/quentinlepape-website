@@ -1,6 +1,7 @@
 import { SVGProps } from "react";
 import { Rocket } from "../images/icons/rocket";
 import { GlobeNetwork } from "../images/icons/globe-network";
+import { GlobeMap } from "../images/icons/globe-map";
 import { Cube } from "../images/icons/cube";
 import { Share } from "../images/icons/share";
 import { ArrowRight } from "../images/icons/arrow-right";
@@ -8,7 +9,8 @@ import { Cross } from "../images/icons/cross";
 
 const Icons = {
   Rocket: Rocket,
-  Globe: GlobeNetwork,
+  GlobeNetwork: GlobeNetwork,
+  GlobeMap: GlobeMap,
   Cube: Cube,
   Share: Share,
   ArrowRight: ArrowRight,
