@@ -4,8 +4,7 @@ import styles from "./layout.module.css";
 import localFont from "next/font/local";
 import Image from "next/image";
 import logo from "./images/logo.svg";
-import LocationsList from "./components/LocationsList";
-import InteractiveGlobe from "./components/globe/InteractiveGlobe";
+import LocationsSection from "./components/locationsSection/LocationsSection";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Variable.woff2",
@@ -42,15 +41,7 @@ export default function RootLayout({
                 Quentin Le Pape
               </Link>
             </nav>
-            <section>
-              <div className={styles.locationsListSection}>
-                <h2 className="mb-2">Work locations</h2>
-                <LocationsList></LocationsList>
-              </div>
-              <div className={styles.globeWrapper}>
-                <InteractiveGlobe />
-              </div>
-            </section>
+            <LocationsSection />
           </div>
         </div>
         <div className="grow overflow-hidden">{children}</div>
