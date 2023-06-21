@@ -6,9 +6,13 @@ import styles from "../../layout.module.css";
 import Icon from "../Icon";
 
 export default function LocationsList({
+  listLocation,
+  globeLocation,
   onHover,
   onHoverOff,
 }: {
+  listLocation?: ICurriculumVitaeLocationsWorked;
+  globeLocation?: ICurriculumVitaeLocationsWorked;
   onHover: (focusedLocation: ICurriculumVitaeLocationsWorked) => void;
   onHoverOff: (focusedLocation: undefined) => void;
 }) {
@@ -16,7 +20,9 @@ export default function LocationsList({
     <ul className="text-medium text-S">
       {CurriculumVitae.locationsWorked.map((location, i) => (
         <li
-          className={`${styles.location} flex flex-row items-center justify-between`}
+          className={`${styles.location} ${
+            location == (listLocation || globeLocation) && styles.focused
+          } flex flex-row items-center justify-between`}
           onMouseEnter={(e) => {
             onHover(location);
           }}

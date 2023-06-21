@@ -16,9 +16,11 @@ const Globe = forwardRef((props: any, ref) => (
 Globe.displayName = "Globe";
 
 export default function InteractiveGlobe({
-  focusedLocation,
+  listLocation,
+  globeLocation,
 }: {
-  focusedLocation?: ICurriculumVitaeLocationsWorked;
+  listLocation?: ICurriculumVitaeLocationsWorked;
+  globeLocation: (focusedLocation: ICurriculumVitaeLocationsWorked) => void;
 }) {
   const locations = CurriculumVitae.locationsWorked;
   const globeRef = useRef<GlobeMethods>();
@@ -37,18 +39,23 @@ export default function InteractiveGlobe({
     setWindowSize({ width: window.innerWidth, height: window.innerHeight });
   }
 
+  function handleObjectHover(location: ICurriculumVitaeLocationsWorked) {
+    setActiveLocation(location);
+    globeLocation(location);
+  }
+
   function object3D(location: ICurriculumVitaeLocationsWorked) {
     function basicMaterial(color: string, opacity?: number) {
       return new THREE.MeshBasicMaterial({
         color: color,
-        transparent: opacity !== undefined ? true : false,
+        transparent: opacity !== undefined && opacity !== 1 ? true : false,
         opacity: opacity ? opacity : 0,
       });
     }
     function phongMaterial(color: string, opacity?: number) {
       return new THREE.MeshPhongMaterial({
         color: color,
-        transparent: opacity !== undefined ? true : false,
+        transparent: opacity !== undefined && opacity !== 1 ? true : false,
         opacity: opacity ? opacity : 0,
       });
     }
@@ -78,25 +85,30 @@ export default function InteractiveGlobe({
     const color = { white: "#ffffff", green: "#72d368" };
 
     const locationPin = new THREE.Mesh(
-      new THREE.SphereGeometry(2),
+      new THREE.SphereGeometry(1.3),
       basicMaterial(color.white)
     );
 
     const hoverAreaA = new THREE.Mesh(
       new THREE.CircleGeometry(7),
-      location == activeLocation
-        ? basicMaterial(color.white, 0.3)
-        : basicMaterial(color.white, 0.15)
+      basicMaterial(color.white, 0.3)
+    );
+    hoverAreaA.translateZ(0.5);
+    const hoverAreaB = new THREE.Mesh(
+      new THREE.CircleGeometry(7),
+      basicMaterial(color.white, 0)
     );
 
     const hoverRingA = new THREE.Line(
       ringLine(7),
       new THREE.LineDashedMaterial({
         color: color.white,
-        // lineWidth: 1,
         scale: 1,
         dashSize: 1,
         gapSize: 1,
+        opacity: 0.7,
+        transparent:
+          activeLocation && location !== activeLocation ? true : false,
       })
     );
     hoverRingA.computeLineDistances();
@@ -123,7 +135,8 @@ export default function InteractiveGlobe({
     // hoverConeGroup.translateY(-8);
 
     const hoverAreaDepictionGroup = new THREE.Group();
-    hoverAreaDepictionGroup.add(hoverAreaA);
+    location == activeLocation && hoverAreaDepictionGroup.add(hoverAreaA);
+    activeLocation == undefined && hoverAreaDepictionGroup.add(hoverAreaB);
     hoverAreaDepictionGroup.add(hoverRingA);
     hoverAreaDepictionGroup.add(hoverRingB);
     // hoverAreaDepictionGroup.add(hoverConeGroup);
@@ -176,20 +189,20 @@ export default function InteractiveGlobe({
 
   // TODO Transition camera automatically?
   useEffect(() => {
-    if (focusedLocation && globeRef.current && isGlobeReady) {
+    if (listLocation && globeRef.current && isGlobeReady) {
       globeRef.current!.pointOfView(
         {
-          lat: focusedLocation.preferredPointOfView.lat,
-          lng: focusedLocation.preferredPointOfView.lon,
+          lat: listLocation.preferredPointOfView.lat,
+          lng: listLocation.preferredPointOfView.lon,
         },
         700
       );
     }
-  }, [focusedLocation]);
+  }, [listLocation]);
 
   useEffect(() => {
-    setActiveLocation(focusedLocation);
-  }, [focusedLocation]);
+    setActiveLocation(listLocation);
+  }, [listLocation]);
 
   return (
     <Globe
@@ -217,7 +230,7 @@ export default function InteractiveGlobe({
       objectThreeObject={(location: ICurriculumVitaeLocationsWorked) =>
         object3D(location)
       }
-      onObjectHover={setActiveLocation}
+      onObjectHover={handleObjectHover}
     />
   );
 }

@@ -7,17 +7,27 @@ import LocationsList from "./LocationsList";
 import InteractiveGlobe from "./globe/InteractiveGlobe";
 
 export default function LocationsSection() {
-  const [focusedLocation, setFocusedLocation] =
+  const [listLocation, setListLocation] =
+    useState<ICurriculumVitaeLocationsWorked>();
+  const [globeLocation, setGlobeLocation] =
     useState<ICurriculumVitaeLocationsWorked>();
 
   return (
     <section>
       <div className={styles.locationsListSection}>
         <h2 className="mb-2">Work locations</h2>
-        <LocationsList onHover={setFocusedLocation} />
+        <LocationsList
+          onHover={setListLocation}
+          onHoverOff={setListLocation}
+          listLocation={listLocation}
+          globeLocation={globeLocation}
+        />
       </div>
       <div className={styles.globeWrapper}>
-        <InteractiveGlobe focusedLocation={focusedLocation} />
+        <InteractiveGlobe
+          listLocation={listLocation}
+          globeLocation={setGlobeLocation}
+        />
       </div>
     </section>
   );
