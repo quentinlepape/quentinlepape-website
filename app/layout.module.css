@@ -6,11 +6,107 @@
 .sidebar {
   width: var(--width-sidebar);
   transition: 150ms;
+  overflow: hidden;
 }
 
-.location::before {
-  content: "📍";
+.locationsListSection {
+  margin-bottom: 200px;
+  position: relative;
+  z-index: 1;
+}
+.location {
+  cursor: pointer;
+  position: relative;
+  white-space: pre;
+}
+.pinIcon {
   padding-right: 0.375em;
 }
-/* .globeWrapper {
-} */
+.location::after {
+  content: "";
+  position: absolute;
+  left: -0.5rem;
+  right: -0.5rem;
+  top: -0.1rem;
+  bottom: -0.1rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-divider);
+  background-color: var(--color-background-light);
+  z-index: -1;
+  opacity: 0;
+  transition: 50ms;
+}
+.location.focused::after {
+  opacity: 1;
+}
+.hoverIndicator {
+  opacity: 0;
+  width: 1.1rem;
+  transition: 50ms;
+}
+.location.focused .hoverIndicator {
+  opacity: 1;
+}
+.hoverIndicator > * {
+  position: absolute;
+  color: var(--color-text-ultra-faded);
+}
+
+.liveIndicator {
+  display: inline-block;
+  background: rgb(114, 211, 104);
+  margin-left: 0.6rem;
+  margin-right: 0.2rem;
+  margin-top: 0.125rem;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(114, 211, 104, 0.2),
+    0 0 0 0px rgba(114, 211, 104, 0);
+  transform: scale(1);
+  animation: pulse-green 3s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 4px rgba(114, 211, 104, 0.2),
+      0 0 0 0 rgba(114, 211, 104, 0.7);
+  }
+
+  30% {
+    box-shadow: 0 0 0 4px rgba(114, 211, 104, 0.2),
+      0 0 0 5px rgba(114, 211, 104, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 4px rgba(114, 211, 104, 0.2),
+      0 0 0 0 rgba(114, 211, 104, 0);
+  }
+}
+
+.globeWrapper {
+  position: absolute;
+  left: calc(50% - 600px / 2);
+  width: 600px;
+  bottom: -320px;
+  cursor: pointer;
+  transition: 1500ms;
+  transition-delay: 2s;
+}
+.globeWrapper::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 410px / 2);
+  bottom: 110px;
+  width: 410px;
+  height: 410px;
+  border-radius: 1000px;
+  background: var(--color-background-light);
+  box-shadow: inset 0px 4px 104px rgba(0, 0, 0, 0.25),
+    inset 0px 4px 64px rgba(0, 0, 0, 0.25);
+}
+.globeWrapper:hover {
+  transition: 250ms;
+  transition-delay: 0s;
+  bottom: -314px;
+}

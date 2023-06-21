@@ -4,7 +4,7 @@ import styles from "./layout.module.css";
 import localFont from "next/font/local";
 import Image from "next/image";
 import logo from "./images/logo.svg";
-import LocationsList from "./components/LocationsList";
+import LocationsSection from "./components/locationsSection/LocationsSection";
 import { Analytics } from "@vercel/analytics/react";
 
 const satoshi = localFont({
@@ -42,13 +42,7 @@ export default function RootLayout({
                 Quentin Le Pape
               </Link>
             </nav>
-            <section>
-              <div>
-                <h2 className="mb-2">Work locations</h2>
-                <LocationsList></LocationsList>
-              </div>
-              <div className={styles.globeWrapper}></div>
-            </section>
+            <LocationsSection />
           </div>
         </div>
         <div className="grow overflow-hidden">{children}</div>
