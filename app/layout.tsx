@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import Image from "next/image";
 import logo from "./images/logo.svg";
 import LocationsSection from "./components/locationsSection/LocationsSection";
+import { Analytics } from "@vercel/analytics/react";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Variable.woff2",
@@ -45,6 +46,7 @@ export default function RootLayout({
           </div>
         </div>
         <div className="grow overflow-hidden">{children}</div>
+        <Analytics />
       </body>
     </html>
   );
