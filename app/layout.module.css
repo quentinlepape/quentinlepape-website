@@ -89,7 +89,7 @@
   left: calc(50% - 600px / 2);
   width: 600px;
   bottom: -320px;
-  cursor: pointer;
+  cursor: grab;
   transition: 1500ms;
   transition-delay: 2s;
 }
