@@ -18,13 +18,23 @@ Globe.displayName = "Globe";
 export default function InteractiveGlobe({
   listLocation,
   globeLocation,
+  setGlobeLocation,
+  isGlobeExpanded,
+  onSetGlobeExpanded,
 }: {
   listLocation?: ICurriculumVitaeLocationsWorked;
-  globeLocation: (focusedLocation: ICurriculumVitaeLocationsWorked) => void;
+  globeLocation?: ICurriculumVitaeLocationsWorked;
+  setGlobeLocation: (
+    focusedLocation: ICurriculumVitaeLocationsWorked | undefined
+  ) => void;
+  isGlobeExpanded: boolean;
+  onSetGlobeExpanded: (isGlobeExpanded: boolean) => void;
 }) {
   const locations = CurriculumVitae.locationsWorked;
   const globeRef = useRef<GlobeMethods>();
   const [isGlobeReady, setGlobeReady] = useState<boolean>();
+  type device = "desktop" | "tablet" | "mobile";
+  const [device, setDevice] = useState<device>("desktop");
   const [windowSize, setWindowSize] = useState({
     width: 1365,
     height: 0,
@@ -32,16 +42,42 @@ export default function InteractiveGlobe({
   const [globeMaterial, setGlobeMaterial] = useState(
     new THREE.MeshPhongMaterial()
   );
-  const [activeLocation, setActiveLocation] =
-    useState<ICurriculumVitaeLocationsWorked>();
 
   function handleResize() {
+    setDevice(
+      window.innerWidth > 1023
+        ? "desktop"
+        : window.innerWidth > 767
+        ? "tablet"
+        : "mobile"
+    );
     setWindowSize({ width: window.innerWidth, height: window.innerHeight });
   }
 
   function handleObjectHover(location: ICurriculumVitaeLocationsWorked) {
-    setActiveLocation(location);
-    globeLocation(location);
+    if (typeof window !== "undefined" && device == "desktop") {
+      setGlobeLocation(location);
+    }
+  }
+
+  function handleObjectClick(location: ICurriculumVitaeLocationsWorked) {
+    if (typeof window !== "undefined" && device !== "desktop") {
+      handleSetGlobeExpansion();
+    }
+    setGlobeLocation(location);
+    globeRef.current!.pointOfView(
+      {
+        lat: location.preferredPointOfView.lat,
+        lng: location.preferredPointOfView.lon,
+      },
+      700
+    );
+  }
+
+  function handleSetGlobeExpansion() {
+    if (!isGlobeExpanded) {
+      onSetGlobeExpanded(true);
+    }
   }
 
   function object3D(location: ICurriculumVitaeLocationsWorked) {
@@ -67,7 +103,6 @@ export default function InteractiveGlobe({
       );
       return wireframe;
     }
-
     function ringLine(size: number) {
       const points = [];
       for (let i = 0; i <= 360; i++) {
@@ -83,50 +118,56 @@ export default function InteractiveGlobe({
     }
 
     const color = { white: "#ffffff", green: "#72d368" };
+    const sizeMultiplier =
+      typeof window !== "undefined" && device == "desktop" ? 1 : 2;
 
+    // const locationPin = new THREE.Mesh(
+    //   new THREE.SphereGeometry(1.3 * sizeMultiplier),
+    //   basicMaterial(color.white)
+    // );
     const locationPin = new THREE.Mesh(
-      new THREE.SphereGeometry(1.3),
+      new THREE.CircleGeometry(0.9 * sizeMultiplier),
       basicMaterial(color.white)
     );
+    locationPin.translateZ(1.1 * sizeMultiplier);
 
     const hoverAreaA = new THREE.Mesh(
-      new THREE.CircleGeometry(7),
+      new THREE.CircleGeometry(7 * sizeMultiplier),
       basicMaterial(color.white, 0.3)
     );
-    hoverAreaA.translateZ(0.5);
+    hoverAreaA.translateZ(0.5 * sizeMultiplier);
     const hoverAreaB = new THREE.Mesh(
-      new THREE.CircleGeometry(7),
+      new THREE.CircleGeometry(7 * sizeMultiplier),
       basicMaterial(color.white, 0)
     );
 
     const hoverRingA = new THREE.Line(
-      ringLine(7),
+      ringLine(7 * sizeMultiplier),
       new THREE.LineDashedMaterial({
         color: color.white,
         scale: 1,
-        dashSize: 1,
-        gapSize: 1,
+        dashSize: 1 * sizeMultiplier,
+        gapSize: 1 * sizeMultiplier,
         opacity: 0.7,
-        transparent:
-          activeLocation && location !== activeLocation ? true : false,
+        transparent: globeLocation && location !== globeLocation ? true : false,
       })
     );
     hoverRingA.computeLineDistances();
 
     const hoverRingB = new THREE.Mesh(
-      new THREE.TorusGeometry(7, 0.2),
-      location == activeLocation
+      new THREE.TorusGeometry(7 * sizeMultiplier, 0.2),
+      location == globeLocation
         ? basicMaterial(color.white, 1)
         : basicMaterial(color.white, 0)
     );
 
     // const hoverConeA = wireframe(
     //   new THREE.ConeGeometry(2.5, 5, 4, 1, true),
-    //   location == activeLocation ? 1 : 0
+    //   location == globeLocation ? 1 : 0
     // );
     // const hoverConeB = new THREE.Mesh(
     //   new THREE.ConeGeometry(2.5, 5, 4, 1),
-    //   basicMaterial(color.white, location == activeLocation ? 0.5 : 0)
+    //   basicMaterial(color.white, location == globeLocation ? 0.5 : 0)
     // );
     // const hoverConeGroup = new THREE.Group();
     // hoverConeGroup.add(hoverConeA);
@@ -135,12 +176,14 @@ export default function InteractiveGlobe({
     // hoverConeGroup.translateY(-8);
 
     const hoverAreaDepictionGroup = new THREE.Group();
-    location == activeLocation && hoverAreaDepictionGroup.add(hoverAreaA);
-    activeLocation == undefined && hoverAreaDepictionGroup.add(hoverAreaB);
+    location == globeLocation && hoverAreaDepictionGroup.add(hoverAreaA);
+    globeLocation == undefined
+      ? hoverAreaDepictionGroup.add(hoverAreaB)
+      : device !== "desktop" && hoverAreaDepictionGroup.add(hoverAreaB);
     hoverAreaDepictionGroup.add(hoverRingA);
     hoverAreaDepictionGroup.add(hoverRingB);
     // hoverAreaDepictionGroup.add(hoverConeGroup);
-    hoverAreaDepictionGroup.translateZ(1);
+    hoverAreaDepictionGroup.translateZ(1 * sizeMultiplier);
 
     const mainGroup = new THREE.Group();
 
@@ -201,7 +244,7 @@ export default function InteractiveGlobe({
   }, [listLocation]);
 
   useEffect(() => {
-    setActiveLocation(listLocation);
+    setGlobeLocation(listLocation);
   }, [listLocation]);
 
   return (
@@ -209,10 +252,15 @@ export default function InteractiveGlobe({
       ref={globeRef}
       showGraticules
       width={
-        // typeof window !== "undefined" && windowSize.width > 1365 ? 320 : 260
-        600
+        typeof window !== "undefined" && device == "desktop"
+          ? 600
+          : windowSize.width
       }
-      height={600}
+      height={
+        typeof window !== "undefined" && device == "desktop"
+          ? 600
+          : windowSize.width
+      }
       backgroundColor="rgba(0,0,0,0)"
       globeMaterial={globeMaterial && globeMaterial}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
@@ -221,7 +269,7 @@ export default function InteractiveGlobe({
         setGlobeReady(true);
       }}
       onGlobeClick={() => {
-        // console.log("click");
+        handleSetGlobeExpansion();
       }}
       objectsData={locations}
       objectLat={getLat}
@@ -231,6 +279,7 @@ export default function InteractiveGlobe({
         object3D(location)
       }
       onObjectHover={handleObjectHover}
+      onObjectClick={handleObjectClick}
     />
   );
 }

@@ -1,7 +1,7 @@
 .sidebarWrapper {
   flex-basis: var(--width-sidebar);
-  display: var(--display-sidebar);
-  transition: 150ms;
+  /* display: var(--display-sidebar); */
+  transition: all 150ms, left 0s, right 0s, width 0s;
 }
 .sidebar {
   width: var(--width-sidebar);
@@ -12,7 +12,7 @@
 .locationsListSection {
   margin-bottom: 200px;
   position: relative;
-  z-index: 1;
+  z-index: 4;
 }
 .location {
   cursor: pointer;
@@ -109,4 +109,85 @@
   transition: 250ms;
   transition-delay: 0s;
   bottom: -314px;
+}
+
+/* Below 1024px */
+
+@media (max-width: 1023px) {
+  .body {
+    flex-direction: row-reverse;
+  }
+  .sidebarWrapper {
+    position: fixed;
+    z-index: 3;
+    width: 100vw;
+    background-color: rgba(51, 51, 51, 0.8);
+  }
+  .sidebarWrapper:not(.isGlobeExpanded) {
+    right: 0;
+    width: 0;
+    background-color: rgba(51, 51, 51, 0);
+  }
+  .sidebarWrapper nav {
+    display: none;
+  }
+  .sidebar {
+    transition: 150ms;
+    right: 0;
+    border-right-width: 0px;
+    border-left-width: 1px;
+  }
+  .sidebarWrapper:not(.isGlobeExpanded) .sidebar {
+    right: calc(-1 * (var(--width-sidebar)));
+  }
+  .locationsListSection {
+    margin-top: 40px;
+  }
+  .globeWrapper {
+    opacity: 1;
+    display: block;
+    position: fixed;
+    z-index: 3;
+    left: auto;
+    right: 0;
+    bottom: 0;
+    width: auto;
+  }
+  .globeWrapper::before {
+    content: none;
+  }
+  .globeWrapper:hover {
+    bottom: 0px;
+  }
+  .closeButton {
+    display: block;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background-color: unset;
+    color: var(--color-text);
+  }
+}
+
+/* Below 768px */
+
+@media (max-width: 767px) {
+  .sidebarWrapper {
+    left: 0;
+  }
+  .sidebarWrapper:not(.isGlobeExpanded) {
+    left: -100vw;
+  }
+  .sidebar {
+    width: calc(20px + 100vw - (var(--width-sidebar) / 2));
+    min-width: var(--width-sidebar);
+    left: 0;
+  }
+  .sidebarWrapper.isGlobeExpanded .sidebar {
+    border-right-width: 1px;
+    border-left-width: 0px;
+  }
+  .sidebarWrapper:not(.isGlobeExpanded) .sidebar {
+    left: calc(-1 * (20px + 100vw - (var(--width-sidebar) / 2)));
+  }
 }
