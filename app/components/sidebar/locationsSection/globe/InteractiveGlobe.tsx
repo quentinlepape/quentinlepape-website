@@ -65,6 +65,20 @@ export default function InteractiveGlobe({
       handleSetGlobeExpansion();
     }
     setGlobeLocation(location);
+    focusCamera(location);
+  }
+
+  function handleSetGlobeExpansion() {
+    if (!isGlobeExpanded && device !== "desktop") {
+      onSetGlobeExpanded(true);
+      if (!globeLocation) {
+        setGlobeLocation(locations[0]);
+        focusCamera(locations[0]);
+      }
+    }
+  }
+
+  function focusCamera(location: ICurriculumVitaeLocationsWorked) {
     globeRef.current!.pointOfView(
       {
         lat: location.preferredPointOfView.lat,
@@ -72,12 +86,6 @@ export default function InteractiveGlobe({
       },
       700
     );
-  }
-
-  function handleSetGlobeExpansion() {
-    if (!isGlobeExpanded) {
-      onSetGlobeExpanded(true);
-    }
   }
 
   function object3D(location: ICurriculumVitaeLocationsWorked) {
@@ -233,13 +241,7 @@ export default function InteractiveGlobe({
   // TODO Transition camera automatically?
   useEffect(() => {
     if (listLocation && globeRef.current && isGlobeReady) {
-      globeRef.current!.pointOfView(
-        {
-          lat: listLocation.preferredPointOfView.lat,
-          lng: listLocation.preferredPointOfView.lon,
-        },
-        700
-      );
+      focusCamera(listLocation);
     }
   }, [listLocation]);
 

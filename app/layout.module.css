@@ -141,7 +141,7 @@
     right: calc(-1 * (var(--width-sidebar)));
   }
   .locationsListSection {
-    margin-top: 40px;
+    /* margin-top: 40px; */
   }
   .globeWrapper {
     opacity: 1;
@@ -160,12 +160,15 @@
     bottom: 0px;
   }
   .closeButton {
-    display: block;
-    position: absolute;
-    top: 40px;
+    position: fixed;
+    z-index: 10;
+    top: 38px;
     left: 40px;
     background-color: unset;
-    color: var(--color-text);
+    color: white;
+  }
+  .isGlobeExpanded .closeButton {
+    display: block;
   }
 }
 
@@ -189,5 +192,9 @@
   }
   .sidebarWrapper:not(.isGlobeExpanded) .sidebar {
     left: calc(-1 * (20px + 100vw - (var(--width-sidebar) / 2)));
+  }
+  .closeButton {
+    right: 40px;
+    left: unset;
   }
 }

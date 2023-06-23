@@ -56,7 +56,7 @@ export default function Sidebar() {
           onClick={() => handleCloseGlobe()}
           className={`${styles.closeButton} hidden`}
         >
-          <Icon name="Cross" size="20" flavor="thin"></Icon>
+          <Icon name="Cross" size="24" flavor="thin"></Icon>
         </button>
       </div>
     </div>
