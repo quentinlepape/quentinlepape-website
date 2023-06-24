@@ -82,7 +82,7 @@ export default function InteractiveGlobe({
   function focusCamera(location: ICurriculumVitaeLocationsWorked) {
     globeRef.current!.pointOfView(
       {
-        lat: location.preferredPointOfView.lat,
+        lat: getDevicePOVBasedLat(location),
         lng: location.preferredPointOfView.lon,
       },
       700
@@ -202,10 +202,18 @@ export default function InteractiveGlobe({
     return mainGroup;
   }
 
-  const getLat = (location: ICurriculumVitaeLocationsWorked) =>
-    location.geo.lat;
-  const getLon = (location: ICurriculumVitaeLocationsWorked) =>
-    location.geo.lon;
+  const lat = (location: ICurriculumVitaeLocationsWorked) => location.geo.lat;
+  const lon = (location: ICurriculumVitaeLocationsWorked) => location.geo.lon;
+
+  function getDevicePOVBasedLat(location: ICurriculumVitaeLocationsWorked) {
+    switch (device) {
+      case "desktop":
+        return location.preferredPointOfView.lat;
+      default:
+        return location.preferredPointOfView.lat + 15;
+        break;
+    }
+  }
 
   useEffect(() => {
     if (isGlobeReady && globeRef.current) {
@@ -278,8 +286,8 @@ export default function InteractiveGlobe({
         handleSetGlobeExpansion();
       }}
       objectsData={locations}
-      objectLat={getLat}
-      objectLng={getLon}
+      objectLat={lat}
+      objectLng={lon}
       objectAltitude={-0.01}
       objectThreeObject={(location: ICurriculumVitaeLocationsWorked) =>
         object3D(location)
