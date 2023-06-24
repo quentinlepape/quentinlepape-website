@@ -140,9 +140,6 @@
   .sidebarWrapper:not(.isGlobeExpanded) .sidebar {
     right: calc(-1 * (var(--width-sidebar)));
   }
-  .locationsListSection {
-    /* margin-top: 40px; */
-  }
   .globeWrapper {
     opacity: 1;
     display: block;
