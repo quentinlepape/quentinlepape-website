@@ -15,6 +15,9 @@
   right: var(--padding-main);
   transition: 150ms;
 }
+.getInTouchButton svg {
+  display: none;
+}
 
 /* Below 1024px */
 
@@ -27,6 +30,27 @@
   }
   .mainContent {
     /* padding-top: calc(3.75rem + 0rem); */
+  }
+  .getInTouchButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--color-text-faded);
+    /* background-color: white; */
+    z-index: 1;
+    bottom: unset;
+    top: calc(30px - 16px);
+    border-color: var(--color-text-ultra-faded);
+  }
+  .getInTouchButton span {
+    display: none;
+  }
+  .getInTouchButton svg {
+    display: block;
+  }
+  .getInTouchButton::after {
+    margin-left: 0.5rem;
+    margin-top: -0.125rem;
   }
 }
 

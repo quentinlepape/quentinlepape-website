@@ -148,12 +148,12 @@ export default function InteractiveGlobe({
 
     const color = { white: "#ffffff", green: "#72d368" };
     const sizeMultiplier =
-      typeof window !== "undefined" && device == "desktop" ? 1 : 2;
+      typeof window !== "undefined" && device == "desktop"
+        ? 1
+        : device == "tablet"
+        ? 1
+        : 1.2;
 
-    // const locationPin = new THREE.Mesh(
-    //   new THREE.SphereGeometry(1.3 * sizeMultiplier),
-    //   basicMaterial(color.white)
-    // );
     const locationPin = new THREE.Mesh(
       new THREE.CircleGeometry(0.9 * sizeMultiplier),
       basicMaterial(color.white)
@@ -189,20 +189,6 @@ export default function InteractiveGlobe({
         ? basicMaterial(color.white, 1)
         : basicMaterial(color.white, 0)
     );
-
-    // const hoverConeA = wireframe(
-    //   new THREE.ConeGeometry(2.5, 5, 4, 1, true),
-    //   location == globeLocation ? 1 : 0
-    // );
-    // const hoverConeB = new THREE.Mesh(
-    //   new THREE.ConeGeometry(2.5, 5, 4, 1),
-    //   basicMaterial(color.white, location == globeLocation ? 0.5 : 0)
-    // );
-    // const hoverConeGroup = new THREE.Group();
-    // hoverConeGroup.add(hoverConeA);
-    // hoverConeGroup.add(hoverConeB);
-    // hoverConeGroup.rotateX(-1.5708);
-    // hoverConeGroup.translateY(-8);
 
     const hoverAreaDepictionGroup = new THREE.Group();
     location == globeLocation && hoverAreaDepictionGroup.add(hoverAreaA);
@@ -242,7 +228,7 @@ export default function InteractiveGlobe({
         .children.find((obj3d) => obj3d.type === "DirectionalLight");
       directionalLight && directionalLight.position.set(1, 1, 1);
       globeRef.current.pointOfView({
-        lat: currentLocation.preferredPointOfView.lat,
+        lat: getDevicePOVBasedLat(currentLocation),
         lng: currentLocation.preferredPointOfView.lon,
         altitude: globeAltitude.initial,
       });
@@ -257,7 +243,7 @@ export default function InteractiveGlobe({
 
   useEffect(() => {
     setGlobeAltitude({
-      initial: device == "desktop" ? 2 : 4,
+      initial: device == "desktop" ? 2 : 8,
       expanded: device == "desktop" ? 2 : 2,
     });
   }, [device]);
