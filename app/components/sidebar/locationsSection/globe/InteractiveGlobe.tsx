@@ -31,6 +31,7 @@ export default function InteractiveGlobe({
   onSetGlobeExpanded: (isGlobeExpanded: boolean) => void;
 }) {
   const locations = CurriculumVitae.locationsWorked;
+  const currentLocation = locations.filter((location) => location.current)[0];
   const globeRef = useRef<GlobeMethods>();
   const [isGlobeReady, setGlobeReady] = useState<boolean>();
   type device = "desktop" | "tablet" | "mobile";
@@ -240,14 +241,17 @@ export default function InteractiveGlobe({
 
   // TODO Transition camera automatically?
   useEffect(() => {
+    setGlobeLocation(listLocation);
     if (listLocation && globeRef.current && isGlobeReady) {
       focusCamera(listLocation);
     }
   }, [listLocation]);
 
   useEffect(() => {
-    setGlobeLocation(listLocation);
-  }, [listLocation]);
+    if (isGlobeReady && isGlobeExpanded == false && currentLocation) {
+      focusCamera(currentLocation);
+    }
+  }, [isGlobeExpanded]);
 
   return (
     <Globe
