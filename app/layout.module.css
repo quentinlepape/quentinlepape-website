@@ -167,6 +167,12 @@
     align-items: center;
     overflow: hidden;
     pointer-events: auto;
+    transition: 0ms;
+  }
+  .sidebarWrapper:not(.isGlobeExpanded) .globeWrapper > * {
+    width: calc((((100vw / 4) * 3) + 45px) / 1.7);
+    height: calc((((100vw / 4) * 3) + 45px) / 1.7);
+    transition: 1000ms;
   }
   .globeWrapper::before {
     content: none;
