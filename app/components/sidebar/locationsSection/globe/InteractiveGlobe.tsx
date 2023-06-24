@@ -40,6 +40,10 @@ export default function InteractiveGlobe({
     width: 1365,
     height: 0,
   });
+  const [globeAltitude, setGlobeAltitude] = useState({
+    initial: 2,
+    expanded: 2,
+  });
   const [globeMaterial, setGlobeMaterial] = useState(
     new THREE.MeshPhongMaterial()
   );
@@ -71,6 +75,7 @@ export default function InteractiveGlobe({
 
   function handleSetGlobeExpansion() {
     if (!isGlobeExpanded && device !== "desktop") {
+      // Expand globe
       onSetGlobeExpanded(true);
       if (!globeLocation) {
         setGlobeLocation(locations[0]);
@@ -79,14 +84,29 @@ export default function InteractiveGlobe({
     }
   }
 
-  function focusCamera(location: ICurriculumVitaeLocationsWorked) {
-    globeRef.current!.pointOfView(
-      {
-        lat: getDevicePOVBasedLat(location),
-        lng: location.preferredPointOfView.lon,
-      },
-      700
-    );
+  function focusCamera(
+    location: ICurriculumVitaeLocationsWorked,
+    altitude?: number
+  ) {
+    if (altitude) {
+      globeRef.current!.pointOfView(
+        {
+          lat: getDevicePOVBasedLat(location),
+          lng: location.preferredPointOfView.lon,
+          altitude: altitude,
+        },
+        700
+      );
+    } else {
+      globeRef.current!.pointOfView(
+        {
+          lat: getDevicePOVBasedLat(location),
+          lng: location.preferredPointOfView.lon,
+          altitude: globeAltitude.expanded,
+        },
+        700
+      );
+    }
   }
 
   function object3D(location: ICurriculumVitaeLocationsWorked) {
@@ -221,7 +241,11 @@ export default function InteractiveGlobe({
         .scene()
         .children.find((obj3d) => obj3d.type === "DirectionalLight");
       directionalLight && directionalLight.position.set(1, 1, 1);
-      globeRef.current.pointOfView({ lat: 17, lng: 9, altitude: 2 });
+      globeRef.current.pointOfView({
+        lat: currentLocation.preferredPointOfView.lat,
+        lng: currentLocation.preferredPointOfView.lon,
+        altitude: globeAltitude.initial,
+      });
       globeRef.current.controls().enableZoom = false;
     }
   }, [isGlobeReady]);
@@ -230,6 +254,25 @@ export default function InteractiveGlobe({
     window.addEventListener("resize", handleResize);
     handleResize();
   }, []);
+
+  useEffect(() => {
+    setGlobeAltitude({
+      initial: device == "desktop" ? 2 : 4,
+      expanded: device == "desktop" ? 2 : 2,
+    });
+  }, [device]);
+
+  useEffect(() => {
+    isGlobeReady &&
+      focusCamera(
+        globeLocation
+          ? globeLocation
+          : listLocation
+          ? listLocation
+          : currentLocation,
+        isGlobeExpanded ? globeAltitude.expanded : globeAltitude.initial
+      );
+  }, [globeAltitude]);
 
   useEffect(() => {
     const newGlobeMaterial = new THREE.MeshPhongMaterial();
@@ -257,7 +300,7 @@ export default function InteractiveGlobe({
 
   useEffect(() => {
     if (isGlobeReady && isGlobeExpanded == false && currentLocation) {
-      focusCamera(currentLocation);
+      focusCamera(currentLocation, globeAltitude.initial);
     }
   }, [isGlobeExpanded]);
 
