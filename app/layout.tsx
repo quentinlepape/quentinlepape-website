@@ -1,11 +1,8 @@
-import Link from "next/link";
 import "./globals.css";
 import styles from "./layout.module.css";
 import localFont from "next/font/local";
-import Image from "next/image";
-import logo from "./images/logo.svg";
-import LocationsSection from "./components/locationsSection/LocationsSection";
 import { Analytics } from "@vercel/analytics/react";
+import Sidebar from "./components/sidebar/Sidebar";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Variable.woff2",
@@ -26,25 +23,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${satoshi.className} flex flex-row bg-light`}>
-        <div
-          className={`${styles.sidebarWrapper} relative h-full grow-0 shrink-0`}
-        >
-          <div
-            className={`${styles.sidebar} fixed h-full p-10 flex flex-col justify-between bg-white border-r border-solid border-color`}
-          >
-            <nav>
-              <Link
-                href="/"
-                className="flex flex-row items-center gap-3 text-XS text-bold text-faded text-uppercase"
-              >
-                <Image src={logo} alt="Logo for Quentin Le Pape's website" />
-                Quentin Le Pape
-              </Link>
-            </nav>
-            <LocationsSection />
-          </div>
-        </div>
+      <body
+        className={`${satoshi.className} ${styles.body} flex flex-row bg-light`}
+      >
+        <Sidebar />
         <div className="grow overflow-hidden">{children}</div>
         <Analytics />
       </body>

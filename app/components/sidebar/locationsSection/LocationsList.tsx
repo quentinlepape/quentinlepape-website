@@ -2,8 +2,8 @@ import {
   CurriculumVitae,
   ICurriculumVitaeLocationsWorked,
 } from "@/app/data/curriculumVitae";
-import styles from "../../layout.module.css";
-import Icon from "../Icon";
+import styles from "../../../layout.module.css";
+import Icon from "../../Icon";
 
 export default function LocationsList({
   listLocation,

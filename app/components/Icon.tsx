@@ -7,6 +7,7 @@ import { Share } from "../images/icons/share";
 import { ArrowRight } from "../images/icons/arrow-right";
 import { Cross } from "../images/icons/cross";
 import { Location } from "../images/icons/location";
+import { Mail } from "../images/icons/mail";
 
 const Icons = {
   Rocket: Rocket,
@@ -17,6 +18,7 @@ const Icons = {
   ArrowRight: ArrowRight,
   Cross: Cross,
   Location: Location,
+  Mail: Mail,
 } as const;
 
 export type IconName = keyof typeof Icons;

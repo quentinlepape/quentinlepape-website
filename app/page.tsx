@@ -8,6 +8,7 @@ import SocialLinks from "./components/socialLinks/SocialLinks";
 import Image from "next/image";
 import logo from "./images/logo.svg";
 import VideoPreviewList from "./components/videoPreviewList/VideoPreviewList";
+import Icon from "./components/Icon";
 
 export default function MainWrapper() {
   return (
@@ -153,7 +154,8 @@ export default function MainWrapper() {
                 className={`
                 ${styles.getInTouchButton} after after-arrow-right text-XS text-medium h7.5 border rounded px-2.5 py-0.5 backdrop-blur bg-light/80`}
               >
-                Get in touch
+                <span>Get in touch</span>
+                <Icon name="Mail" flavor="thin" size="20" />
               </Link>
             </address>
           </footer>
