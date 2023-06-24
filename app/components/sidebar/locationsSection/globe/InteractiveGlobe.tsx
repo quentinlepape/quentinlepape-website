@@ -221,6 +221,17 @@ export default function InteractiveGlobe({
     }
   }
 
+  function handleAutoRotate() {
+    if (globeRef.current) {
+      if (device !== "desktop") {
+        globeRef.current!.controls().autoRotate = true;
+        globeRef.current!.controls().autoRotateSpeed = 0.4;
+      } else {
+        globeRef.current!.controls().autoRotate = false;
+      }
+    }
+  }
+
   useEffect(() => {
     if (isGlobeReady && globeRef.current) {
       const directionalLight = globeRef.current
@@ -233,6 +244,7 @@ export default function InteractiveGlobe({
         altitude: globeAltitude.initial,
       });
       globeRef.current.controls().enableZoom = false;
+      handleAutoRotate();
     }
   }, [isGlobeReady]);
 
@@ -242,10 +254,12 @@ export default function InteractiveGlobe({
   }, []);
 
   useEffect(() => {
+    // detected device change
     setGlobeAltitude({
       initial: device == "desktop" ? 2 : 8,
       expanded: device == "desktop" ? 2 : 2,
     });
+    handleAutoRotate();
   }, [device]);
 
   useEffect(() => {
