@@ -25,12 +25,6 @@
   .responsiveHeader {
     display: flex;
   }
-  .mainWrapper {
-    /* padding-top: 0; */
-  }
-  .mainContent {
-    /* padding-top: calc(3.75rem + 0rem); */
-  }
   .getInTouchButton {
     display: flex;
     flex-direction: row;
