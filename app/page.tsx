@@ -155,7 +155,7 @@ export default function MainWrapper() {
                 ${styles.getInTouchButton} after after-arrow-right text-XS text-medium h7.5 border rounded px-2.5 py-0.5 backdrop-blur bg-light/80`}
               >
                 <span>Get in touch</span>
-                <Icon name="Mail" flavor="thin" size="20" />
+                <Icon name="Mail" flavor="thin" size="16" />
               </Link>
             </address>
           </footer>
