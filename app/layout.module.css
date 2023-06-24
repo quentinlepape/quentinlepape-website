@@ -151,7 +151,22 @@
     left: auto;
     right: 0;
     bottom: 0;
-    width: auto;
+    width: 100vw;
+    height: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+  .globeWrapper > * {
+    /* Make bounding-box a circle and the same size as the globe (instead of a large square) */
+    width: calc(((100vw / 4) * 3) + 45px);
+    height: calc(((100vw / 4) * 3) + 45px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    pointer-events: auto;
   }
   .globeWrapper::before {
     content: none;
