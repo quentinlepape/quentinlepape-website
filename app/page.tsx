@@ -139,6 +139,7 @@ export default function MainWrapper() {
                 Let’s connect at{" "}
                 <Link
                   href="mailto:quentinlepape@gmail.com"
+                  target="_blank"
                   className="text-link text-underline"
                 >
                   quentinlepape@gmail.com
@@ -151,6 +152,7 @@ export default function MainWrapper() {
               <SocialLinks />
               <Link
                 href="mailto:quentinlepape@gmail.com"
+                target="_blank"
                 className={`
                 ${styles.getInTouchButton} after after-arrow-right text-XS text-medium h7.5 border rounded px-2.5 py-0.5 backdrop-blur bg-light/80`}
               >
