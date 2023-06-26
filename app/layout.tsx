@@ -3,6 +3,8 @@ import styles from "./layout.module.css";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import Sidebar from "./components/sidebar/Sidebar";
+import * as FullStory from "@fullstory/browser";
+import { useEffect } from "react";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Variable.woff2",
@@ -21,6 +23,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  useEffect(() => {
+    FullStory.init({ orgId: "o-1N25XN-na1", debug: true });
+  }, []);
+
   return (
     <html lang="en">
       <head>
