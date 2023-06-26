@@ -41,6 +41,18 @@
   resolved "https://registry.npmjs.org/@eslint/js/-/js-8.42.0.tgz"
   integrity sha512-6SWlXpWU5AvId8Ac7zjzmIOqMOba/JWY8XZ4A7q7Gn1Vlfg/SFFIlrtHXt9nPn4op9ZPAkl91Jao+QQv3r/ukw==
 
+"@fullstory/browser@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.npmjs.org/@fullstory/browser/-/browser-1.7.1.tgz"
+  integrity sha512-IBPisG+xRyTHHX8XkZJkQRbP2hVYNMZUYW8R3YiB582dl/VZImkFN+LopIAfPqB97FAZgUTofi7flkrHT4Qmtg==
+  dependencies:
+    "@fullstory/snippet" "1.3.1"
+
+"@fullstory/snippet@1.3.1":
+  version "1.3.1"
+  resolved "https://registry.npmjs.org/@fullstory/snippet/-/snippet-1.3.1.tgz"
+  integrity sha512-NgrBWGHH5i8zejlRFSyJNhovkNqHAXsWKrcXIWaABrgESwbkdGETjOU7BD7d1ZeT0X+QXL/2yr/1y4xnWfVkwQ==
+
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.10"
   resolved "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.11.10.tgz"
