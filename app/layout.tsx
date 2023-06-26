@@ -3,7 +3,6 @@ import styles from "./layout.module.css";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import Sidebar from "./components/sidebar/Sidebar";
-import Head from "next/head";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Variable.woff2",
