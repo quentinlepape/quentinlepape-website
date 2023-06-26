@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -46,7 +46,7 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#333333" />
         <meta name="msapplication-TileColor" content="#f6f7fa" />
         <meta name="theme-color" content="#ffffff" />
-      </Head>
+      </head>
       <body
         className={`${satoshi.className} ${styles.body} flex flex-row bg-light`}
       >
