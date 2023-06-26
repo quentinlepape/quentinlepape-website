@@ -1,6 +1,5 @@
 import { StaticImageData } from "next/image";
-import palantirLogo from "../images/palantir-logo.png";
-import palantirLogoSvg from "../images/palantir-logo.svg";
+import PalantirLogo from "../images/palantir-logo";
 import ontologyPoster from "../../public/videos/previews/ontology/poster.png";
 import aimlPoster from "../../public/videos/previews/aiml/poster.png";
 import wfpPoster from "../../public/videos/previews/wfp/poster.png";
@@ -26,11 +25,19 @@ export interface ICurriculumVitaeExperience {
   companyName: string;
   image:
     | {
+        svgSource: React.ReactNode;
+        imageSource?: never;
+        imageAlt?: never;
+        icon?: never;
+      }
+    | {
+        svgSource?: never;
         imageSource: StaticImageData;
         imageAlt: string;
         icon?: never;
       }
     | {
+        svgSource?: never;
         imageSource?: never;
         imageAlt?: never;
         icon: IconName;
@@ -118,8 +125,7 @@ export const CurriculumVitae: {
       type: "experience",
       companyName: "Palantir Technologies",
       image: {
-        imageSource: palantirLogoSvg,
-        imageAlt: "Palantir Technologies logo",
+        svgSource: <PalantirLogo />,
       },
       detail: "",
       link: new URL("https://www.palantir.com/"),
