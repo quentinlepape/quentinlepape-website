@@ -44,8 +44,12 @@ function toITableItem(item: TCurriculumVitaeItem): ITableItem {
             height={30}
             className="border-inset rounded mr-3.5 w-7.5 aspect-square h-auto"
           ></Image>
+        ) : item.image.svgSource ? (
+          <div className="border-inset rounded mr-3.5 w-7.5 h-7.5 aspect-square">
+            {item.image.svgSource}
+          </div>
         ) : (
-          <IconSquare name={item.image.icon}></IconSquare>
+          item.image.icon && <IconSquare name={item.image.icon}></IconSquare>
         ),
         title: item.companyName,
         subtitle: item.detail && "(" + item.detail + ")",

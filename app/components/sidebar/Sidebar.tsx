@@ -3,8 +3,7 @@
 import { useState } from "react";
 import styles from "../../layout.module.css";
 import Link from "next/link";
-import Image from "next/image";
-import logo from "@/app/images/logo.svg";
+import Logo from "@/app/images/logo";
 import LocationsSection from "./locationsSection/LocationsSection";
 import { ICurriculumVitaeLocationsWorked } from "@/app/data/curriculumVitae";
 import Icon from "@/app/components/Icon";
@@ -40,7 +39,7 @@ export default function Sidebar() {
             href="/"
             className="flex flex-row items-center gap-3 text-XS text-bold text-faded text-uppercase"
           >
-            <Image src={logo} alt="Logo for Quentin Le Pape's website" />
+            <Logo />
             Quentin Le Pape
           </Link>
         </nav>

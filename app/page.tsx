@@ -5,8 +5,7 @@ import ClientsList from "./components/ClientsList";
 import TitledSection from "./components/TitledSection";
 import Table from "./components/table/Table";
 import SocialLinks from "./components/socialLinks/SocialLinks";
-import Image from "next/image";
-import logo from "./images/logo.svg";
+import Logo from "@/app/images/logo";
 import VideoPreviewList from "./components/videoPreviewList/VideoPreviewList";
 import Icon from "./components/Icon";
 
@@ -20,7 +19,7 @@ export default function MainWrapper() {
           href="/"
           className="flex flex-row items-center gap-3 text-XS text-bold text-faded text-uppercase"
         >
-          <Image src={logo} alt="Logo for Quentin Le Pape's website" />
+          <Logo />
           Quentin Le Pape
         </Link>
       </nav>
