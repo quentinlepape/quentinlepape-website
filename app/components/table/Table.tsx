@@ -274,7 +274,7 @@ export default function Table({
             onClick={() => {
               el.link && window.location.assign(el.link);
             }}
-            className={el.link && styles.linkRow}
+            className={el.link ? styles.linkRow : ""}
           >
             {RowHeader(el)}
             {RowMiddle(el)}
