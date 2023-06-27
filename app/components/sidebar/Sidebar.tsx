@@ -22,7 +22,7 @@ export default function Sidebar() {
     setGlobeLocation(undefined);
   }
   useEffect(() => {
-    FullStory.init({ orgId: "o-1N25XN-na1", debug: true });
+    FullStory.init({ orgId: "o-1N25XN-na1" });
   }, []);
 
   return (

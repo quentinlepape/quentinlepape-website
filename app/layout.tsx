@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import Sidebar from "./components/sidebar/Sidebar";
 import { HighlightInit } from "@highlight-run/next/highlight-init";
+import Script from "next/script";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Variable.woff2",
@@ -24,6 +25,20 @@ export default function RootLayout({
 }) {
   return (
     <>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+      <Script id="Google Analytics" strategy="afterInteractive">
+        {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                    page_path: window.location.pathname,
+                    });
+                `}
+      </Script>
       <HighlightInit
         projectId={"odz433gp"}
         tracingOrigins
