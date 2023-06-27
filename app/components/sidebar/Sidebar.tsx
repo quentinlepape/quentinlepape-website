@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../layout.module.css";
 import Link from "next/link";
 import Logo from "@/app/images/logo";
 import LocationsSection from "./locationsSection/LocationsSection";
 import { ICurriculumVitaeLocationsWorked } from "@/app/data/curriculumVitae";
 import Icon from "@/app/components/Icon";
+import * as FullStory from "@fullstory/browser";
 
 export default function Sidebar() {
   const [isGlobeExpanded, setGlobeExpanded] = useState<boolean>(false);
@@ -20,6 +21,9 @@ export default function Sidebar() {
     setListLocation(undefined);
     setGlobeLocation(undefined);
   }
+  useEffect(() => {
+    FullStory.init({ orgId: "o-1N25XN-na1" });
+  }, []);
 
   return (
     <div

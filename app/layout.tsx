@@ -3,6 +3,8 @@ import styles from "./layout.module.css";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import Sidebar from "./components/sidebar/Sidebar";
+import { HighlightInit } from "@highlight-run/next/highlight-init";
+import Script from "next/script";
 
 const satoshi = localFont({
   src: "./fonts/Satoshi-Variable.woff2",
@@ -22,37 +24,63 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#333333" />
-        <meta name="msapplication-TileColor" content="#f6f7fa" />
-        <meta name="theme-color" content="#ffffff" />
-      </head>
-      <body
-        className={`${satoshi.className} ${styles.body} flex flex-row bg-light`}
-      >
-        <Sidebar />
-        <div className="grow overflow-hidden">{children}</div>
-        <Analytics />
-      </body>
-    </html>
+    <>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+      <Script id="Google Analytics" strategy="afterInteractive">
+        {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                    page_path: window.location.pathname,
+                    });
+                `}
+      </Script>
+      <HighlightInit
+        projectId={"odz433gp"}
+        tracingOrigins
+        enableCanvasRecording
+        networkRecording={{
+          enabled: true,
+          recordHeadersAndBody: true,
+          urlBlocklist: [],
+        }}
+      />
+      <html lang="en">
+        <head>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/site.webmanifest" />
+          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#333333" />
+          <meta name="msapplication-TileColor" content="#f6f7fa" />
+          <meta name="theme-color" content="#ffffff" />
+        </head>
+        <body
+          className={`${satoshi.className} ${styles.body} flex flex-row bg-light`}
+        >
+          <Sidebar />
+          <div className="grow overflow-hidden">{children}</div>
+          <Analytics />
+        </body>
+      </html>
+    </>
   );
 }
