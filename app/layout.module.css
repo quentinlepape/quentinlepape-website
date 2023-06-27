@@ -218,7 +218,10 @@
     border-left-width: 0px;
   }
   .sidebarWrapper:not(.isGlobeExpanded) .sidebar {
-    left: calc(-1 * (20px + 100vw - (var(--width-sidebar) / 2)));
+    left: min(
+      calc(-1 * (20px + 100vw - (var(--width-sidebar) / 2))),
+      calc(-1 * var(--width-sidebar))
+    );
   }
   .closeButton {
     right: 40px;
