@@ -22,7 +22,7 @@ export default function TitledSection({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <section className={"overflow-hidden " + sectionClassNames}>
+    <section className={sectionClassNames}>
       <h2 className={titleClassNames}>{title}</h2>
       {children}
     </section>

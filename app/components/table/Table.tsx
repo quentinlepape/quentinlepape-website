@@ -1,10 +1,12 @@
+"use client";
+
 /**
  *  @fileOverview Takes a list of items and returns a table.
  *  @author Quentin Le Pape
  */
 
 import styles from "./table.module.css";
-import Link from "next/link";
+// import Link from "next/link";
 import {
   CurriculumVitaeType,
   ICurriculumVitaeEducation,
@@ -90,7 +92,7 @@ function toITableItem(item: TCurriculumVitaeItem): ITableItem {
  */
 function RowHeader(item: ITableItem): JSX.Element {
   const rowContent: JSX.Element = (
-    <div className="group">
+    <div>
       <div className="flex flex-row text-regular items-center py-4.5">
         {item.image && item.image}
         <h3 className="text-S text-medium text-line-height-S text-left">
@@ -112,7 +114,9 @@ function RowHeader(item: ITableItem): JSX.Element {
             )}
           </span>
           {item.link && (
-            <span className="relative top-0.25 text-dark/30 inline-flex items-center group-hover:text-dark/50 transition">
+            <span
+              className={`${styles.linkIcon} relative top-0.25 text-dark/30 inline-flex items-center transition`}
+            >
               <Icon name="Share" size="14"></Icon>
             </span>
           )}
@@ -132,13 +136,14 @@ function RowHeader(item: ITableItem): JSX.Element {
   );
   return (
     <th scope="row" className={`${styles.rowHeaderWrapper}`}>
-      {item.link ? (
+      {rowContent}
+      {/* {item.link ? (
         <Link href={item.link} target="_blank">
           {rowContent}
         </Link>
       ) : (
         rowContent
-      )}
+      )} */}
     </th>
   );
 }
@@ -264,7 +269,13 @@ export default function Table({
     >
       <tbody className="">
         {tableItems.map((el, i) => (
-          <tr key={i}>
+          <tr
+            key={i}
+            onClick={() => {
+              el.link && window.location.assign(el.link);
+            }}
+            className={el.link && styles.linkRow}
+          >
             {RowHeader(el)}
             {RowMiddle(el)}
             {RowEnd(el)}
