@@ -3,7 +3,6 @@ import styles from "./layout.module.css";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import Sidebar from "./components/sidebar/Sidebar";
-import { HighlightInit } from "@highlight-run/next/highlight-init";
 import Script from "next/script";
 
 const satoshi = localFont({
@@ -53,16 +52,6 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-WZFK6M5');`}</Script>
-          <HighlightInit
-            projectId={"odz433gp"}
-            tracingOrigins
-            enableCanvasRecording
-            networkRecording={{
-              enabled: true,
-              recordHeadersAndBody: true,
-              urlBlocklist: [],
-            }}
-          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
