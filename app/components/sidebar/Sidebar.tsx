@@ -29,7 +29,7 @@ export default function Sidebar() {
     <div
       className={`${styles.sidebarWrapper} ${
         isGlobeExpanded ? styles.isGlobeExpanded : ""
-      } relative h-full grow-0 shrink-0`}
+      } h-full grow-0 shrink-0`}
       onClick={() => handleCloseGlobe()}
     >
       <div
