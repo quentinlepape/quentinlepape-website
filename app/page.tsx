@@ -41,14 +41,14 @@ export default function MainWrapper() {
                   <span className="list-marker">
                     <span className="list-marker-number">1</span>.
                   </span>
-                  Full-Stack <span className="text-underline">Developer</span>
+                  Product Design <span className="text-underline">Leader</span>
                   <span className="opacity-25">,</span>
                 </li>
                 <li>
                   <span className="list-marker">
                     <span className="list-marker-number">2</span>.
                   </span>
-                  Product Design <span className="text-underline">Leader</span>
+                  Full-Stack <span className="text-underline">Developer</span>
                   <span className="opacity-25">,</span>
                 </li>
                 <li>
