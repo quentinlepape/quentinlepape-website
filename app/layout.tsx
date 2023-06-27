@@ -25,12 +25,21 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-      />
-      <Script id="Google Analytics" strategy="afterInteractive">
-        {`
+      <html lang="en">
+        <head>
+          <Script id="Microsoft Clarity" type="text/javascript">
+            {`(function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "hqggis5sxv");`}
+          </Script>
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+          />
+          <Script id="Google Analytics" strategy="afterInteractive">
+            {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
@@ -38,19 +47,22 @@ export default function RootLayout({
                     page_path: window.location.pathname,
                     });
                 `}
-      </Script>
-      <HighlightInit
-        projectId={"odz433gp"}
-        tracingOrigins
-        enableCanvasRecording
-        networkRecording={{
-          enabled: true,
-          recordHeadersAndBody: true,
-          urlBlocklist: [],
-        }}
-      />
-      <html lang="en">
-        <head>
+          </Script>
+          <Script id="Google Tag Manager">{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WZFK6M5');`}</Script>
+          <HighlightInit
+            projectId={"odz433gp"}
+            tracingOrigins
+            enableCanvasRecording
+            networkRecording={{
+              enabled: true,
+              recordHeadersAndBody: true,
+              urlBlocklist: [],
+            }}
+          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -76,6 +88,14 @@ export default function RootLayout({
         <body
           className={`${satoshi.className} ${styles.body} flex flex-row bg-light`}
         >
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-WZFK6M5"
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            ></iframe>
+          </noscript>
           <Sidebar />
           <div className="grow overflow-hidden">{children}</div>
           <Analytics />
