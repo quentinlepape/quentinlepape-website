@@ -153,7 +153,7 @@ export const CurriculumVitae: {
       companyName: "Contracting",
       image: { icon: "GlobeNetwork" },
       jobTitles: ["Product Designer", "Developer"],
-      date: "Since 2014",
+      date: "Since 2012",
     },
   ],
 
