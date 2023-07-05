@@ -8,6 +8,7 @@ import { ArrowRight } from "../images/icons/arrow-right";
 import { Cross } from "../images/icons/cross";
 import { Location } from "../images/icons/location";
 import { Mail } from "../images/icons/mail";
+import { PdfDocument } from "../images/icons/pdf-document";
 
 const Icons = {
   Rocket: Rocket,
@@ -19,11 +20,12 @@ const Icons = {
   Cross: Cross,
   Location: Location,
   Mail: Mail,
+  PdfDocument: PdfDocument,
 } as const;
 
 export type IconName = keyof typeof Icons;
 
-export type IconFlavor = "default" | "thin";
+export type IconFlavor = "default" | "thin" | "bold" | "fill" | "duotone";
 
 export interface ISVGIcon extends SVGProps<SVGSVGElement> {
   flavor?: IconFlavor;

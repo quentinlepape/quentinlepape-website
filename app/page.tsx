@@ -149,15 +149,33 @@ export default function MainWrapper() {
           <footer className="mt-12.5">
             <address>
               <SocialLinks />
-              <Link
-                href="mailto:quentinlepape@gmail.com"
-                target="_blank"
-                className={`
-                ${styles.getInTouchButton} after after-arrow-right text-XS text-medium h7.5 border rounded px-2.5 py-0.5 backdrop-blur bg-light/80`}
+              <div
+                className={`${styles.footerFloatingWrapper} flex flex-row gap-1`}
               >
-                <span>Get in touch</span>
-                <Icon name="Mail" flavor="thin" size="16" />
-              </Link>
+                <Link
+                  href="/QuentinLePape_Resume.pdf"
+                  target="_blank"
+                  className={`
+                ${styles.footerFloatingButton} transition flex items-center h-8.5 text-XS text-medium border rounded px-2.5 py-0.5 backdrop-blur bg-light/80`}
+                >
+                  <span className="w-none opacity overflow-hidden">Resume</span>
+                  <Icon name="PdfDocument" flavor="duotone" size="20" />
+                </Link>
+                <Link
+                  href="mailto:quentinlepape@gmail.com"
+                  target="_blank"
+                  className={`
+                ${styles.footerFloatingButton} transition flex items-center h-8.5 after after-arrow-right text-XS text-medium border rounded px-2.5 py-0.5 backdrop-blur bg-light/80`}
+                >
+                  <span className="hidden-mobile-tablet">Get in touch</span>
+                  <Icon
+                    classNames={"hidden-desktop"}
+                    name="Mail"
+                    flavor="thin"
+                    size="16"
+                  />
+                </Link>
+              </div>
             </address>
           </footer>
         </div>
