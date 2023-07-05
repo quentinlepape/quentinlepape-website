@@ -48,7 +48,7 @@ export default function MainWrapper() {
                   <span className="list-marker">
                     <span className="list-marker-number">2</span>.
                   </span>
-                  Full-Stack <span className="text-underline">Developer</span>
+                  Front-End <span className="text-underline">Developer</span>
                   <span className="opacity-25">,</span>
                 </li>
                 <li>
