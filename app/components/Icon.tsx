@@ -9,6 +9,9 @@ import { Cross } from "../images/icons/cross";
 import { Location } from "../images/icons/location";
 import { Mail } from "../images/icons/mail";
 import { PdfDocument } from "../images/icons/pdf-document";
+import { Instagram } from "../images/icons/instagram";
+import { Linkedin } from "../images/icons/linkedin";
+import { Mail2 } from "../images/icons/mail2";
 
 const Icons = {
   Rocket: Rocket,
@@ -21,6 +24,9 @@ const Icons = {
   Location: Location,
   Mail: Mail,
   PdfDocument: PdfDocument,
+  Instagram: Instagram,
+  Linkedin: Linkedin,
+  Mail2: Mail2,
 } as const;
 
 export type IconName = keyof typeof Icons;

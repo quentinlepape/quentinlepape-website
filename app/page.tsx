@@ -170,9 +170,9 @@ export default function MainWrapper() {
                   <span className="hidden-mobile-tablet">Get in touch</span>
                   <Icon
                     classNames={"hidden-desktop"}
-                    name="Mail"
-                    flavor="thin"
-                    size="16"
+                    name="Mail2"
+                    flavor="duotone"
+                    size="20"
                   />
                 </Link>
               </div>
