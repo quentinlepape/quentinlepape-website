@@ -3,8 +3,16 @@
 }
 .socialLinksList a {
   display: flex;
-  padding-left: 0.125rem; /* 2px */
-  padding-right: 0.125rem; /* 2px */
+  align-items: center;
+  padding: 0.25rem; /* 2px */
+  transition: 50ms;
+  background-color: rgba(var(--color-black-triplet), 0);
+  border-radius: 0.25rem;
+  color: rgba(var(--color-black-triplet), 0.9);
+}
+.socialLinksList a:hover {
+  background-color: rgba(var(--color-black-triplet), 0.15);
+  color: rgba(var(--color-black-triplet), 1);
 }
 @media (pointer: coarse) {
   .socialLinksList a {

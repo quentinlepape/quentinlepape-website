@@ -2,21 +2,24 @@
   padding-left: var(--padding-main);
   background-color: rgba(var(--color-background-light-triplet), 0.8);
   position: fixed;
-  /* top: 0; */
   z-index: 1;
 }
 .mainWrapper {
   padding: var(--padding-main);
   transition: 150ms;
 }
-.getInTouchButton {
+.footerFloatingWrapper {
   position: fixed;
   bottom: var(--padding-main);
   right: var(--padding-main);
   transition: 150ms;
 }
-.getInTouchButton svg {
-  display: none;
+.footerFloatingButton {
+  transition: 50ms;
+}
+.footerFloatingButton:hover {
+  background-color: rgba(var(--color-black-triplet), 0.03);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 /* Below 1024px */
@@ -25,26 +28,22 @@
   .responsiveHeader {
     display: flex;
   }
-  .getInTouchButton {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: var(--color-text-faded);
-    /* background-color: white; */
+  .footerFloatingWrapper {
     z-index: 1;
     bottom: unset;
     top: calc(30px - 16px);
+  }
+  .footerFloatingButton {
+    height: 2rem;
+    color: var(--color-text-faded);
     border-color: var(--color-text-ultra-faded);
   }
-  .getInTouchButton span {
-    display: none;
-  }
-  .getInTouchButton svg {
-    display: block;
-  }
-  .getInTouchButton::after {
+  .footerFloatingButton::after {
     margin-left: 0.5rem;
     margin-top: -0.125rem;
+  }
+  .footerFloatingButton:hover {
+    border-color: var(--color-text-faded);
   }
 }
 

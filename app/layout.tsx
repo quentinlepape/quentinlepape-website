@@ -14,7 +14,7 @@ const satoshi = localFont({
 
 export const metadata = {
   title: "Quentin Le Pape",
-  description: "Product Design Leader, Full-Stack Developer, Serial Founder.",
+  description: "Product Design Leader, Front-End Developer, Serial Founder.",
 };
 
 export default function RootLayout({
