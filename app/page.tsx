@@ -100,10 +100,14 @@ export default function MainWrapper() {
               .
             </p>
             <p>
-              Currently building the future of web design at{" "}
-              <span className="text-dark text-medium link-dotted">
-                webcraft
-              </span>
+              Currently building the future of command and control at{" "}
+              <Link
+                  href="https://www.comand.ai/"
+                  target="_blank"
+                  className="link-dotted"
+                >
+                  comand ai
+                </Link>
               .
             </p>
           </section>

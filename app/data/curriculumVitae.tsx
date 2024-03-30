@@ -115,10 +115,11 @@ export const CurriculumVitae: {
   experience: [
     {
       type: "experience",
-      companyName: "Webcraft",
+      companyName: "Comand AI",
       image: { icon: "Rocket" },
-      detail: "founder",
-      jobTitles: ["Front-End Developer", "Product Designer"],
+      detail: "",
+      link: new URL("https://www.comand.ai/"),
+      jobTitles: ["Product Design Founder"],
       date: { startDate: "2023", endDate: "Now" },
     },
     {
@@ -130,7 +131,7 @@ export const CurriculumVitae: {
       detail: "",
       link: new URL("https://www.palantir.com/"),
       jobTitles: ["Product Design Lead"],
-      date: { startDate: "2017", endDate: "2022" },
+      date: { startDate: "2017", endDate: "2023" },
     },
     {
       type: "experience",
