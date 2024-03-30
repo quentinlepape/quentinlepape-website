@@ -104,7 +104,7 @@ export default function MainWrapper() {
               <Link
                   href="https://www.comand.ai/"
                   target="_blank"
-                  className="link-dotted"
+                  className="text-dark text-medium link-dotted"
                 >
                   comand ai
                 </Link>
