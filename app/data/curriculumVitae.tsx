@@ -117,9 +117,9 @@ export const CurriculumVitae: {
       type: "experience",
       companyName: "Comand AI",
       image: { icon: "Rocket" },
-      detail: "founder",
+      detail: "",
       link: new URL("https://www.comand.ai/"),
-      jobTitles: ["Product Design Founder"],
+      jobTitles: ["Founding Product Designer"],
       date: { startDate: "2023", endDate: "Now" },
     },
     {
